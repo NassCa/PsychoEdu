@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PsychoEdukation · Klinische Bibliothek</title>
+  <meta name="description" content="Evidenzbasierte Psychoedukations-Bibliothek für Psychotherapeutinnen in der ambulanten Erwachsenentherapie – Störungsbilder, Leitlinien, Literatur." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== DESIGN TOKENS ===== */
+    :root, [data-theme="light"] {
+      --color-bg: #f5f7f4;
+      --color-surface: #ffffff;
+      --color-surface-2: #f0f4ef;
+      --color-surface-offset: #e8ede7;
+      --color-border: #c8d4c6;
+      --color-divider: #dce5da;
+      --color-text: #1e2b1c;
+      --color-text-muted: #5a6e58;
+      --color-text-faint: #9aaa98;
+      --color-primary: #2d6a4f;
+      --color-primary-hover: #1b4332;
+      --color-primary-active: #0f2d1f;
+      --color-primary-light: #d8ead3;
+      --color-accent: #52796f;
+      --color-accent-2: #84a98c;
+      --color-tag-bg: #e8f0e6;
+      --color-tag-text: #2d6a4f;
+      --color-warn: #7c4700;
+      --color-warn-bg: #fef3e2;
+      --color-info: #1a4e6e;
+      --color-info-bg: #e3f0f8;
+      --shadow-sm: 0 1px 3px rgba(30,43,28,0.07);
+      --shadow-md: 0 4px 16px rgba(30,43,28,0.10);
+      --shadow-lg: 0 12px 40px rgba(30,43,28,0.13);
+      --radius-sm: 0.4rem;
+      --radius-md: 0.6rem;
+      --radius-lg: 1rem;
+      --radius-xl: 1.5rem;
+      --font-display: 'Playfair Display', 'Georgia', serif;
+      --font-body: 'Source Sans 3', 'Helvetica Neue', sans-serif;
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3rem);
+      --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --sidebar-width: 280px;
+    }
+    [data-theme="dark"] {
+      --color-bg: #141a13;
+      --color-surface: #1c231b;
+      --color-surface-2: #202820;
+      --color-surface-offset: #252d24;
+      --color-border: #364035;
+      --color-divider: #2c352b;
+      --color-text: #d0dace;
+      --color-text-muted: #7a8d78;
+      --color-text-faint: #4d5e4b;
+      --color-primary: #52b788;
+      --color-primary-hover: #74c69d;
+      --color-primary-active: #95d5b2;
+      --color-primary-light: #1e3329;
+      --color-accent: #74c69d;
+      --color-accent-2: #95d5b2;
+      --color-tag-bg: #1e3329;
+      --color-tag-text: #74c69d;
+      --color-warn: #ffb347;
+      --color-warn-bg: #2c1f00;
+      --color-info: #74b9d0;
+      --color-info-bg: #0e2030;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.25);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.35);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.45);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --color-bg: #141a13; --color-surface: #1c231b; --color-surface-2: #202820;
+        --color-surface-offset: #252d24; --color-border: #364035; --color-divider: #2c352b;
+        --color-text: #d0dace; --color-text-muted: #7a8d78; --color-text-faint: #4d5e4b;
+        --color-primary: #52b788; --color-primary-hover: #74c69d; --color-primary-active: #95d5b2;
+        --color-primary-light: #1e3329; --color-accent: #74c69d; --color-accent-2: #95d5b2;
+        --color-tag-bg: #1e3329; --color-tag-text: #74c69d;
+        --color-warn: #ffb347; --color-warn-bg: #2c1f00;
+        --color-info: #74b9d0; --color-info-bg: #0e2030;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.25); --shadow-md: 0 4px 16px rgba(0,0,0,0.35);
+        --shadow-lg: 0 12px 40px rgba(0,0,0,0.45);
+      }
+    }
+
+    /* ===== BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-body); font-size: var(--text-base); color: var(--color-text); background: var(--color-bg); min-height: 100dvh; line-height: 1.65; }
+    img { display: block; max-width: 100%; }
+    button { cursor: pointer; background: none; border: none; font: inherit; color: inherit; }
+    a { color: var(--color-primary); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--color-primary-hover); }
+    h1,h2,h3,h4,h5 { font-family: var(--font-display); line-height: 1.2; text-wrap: balance; color: var(--color-text); }
+    p, li { text-wrap: pretty; max-width: 70ch; }
+    :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: var(--radius-sm); }
+    ::selection { background: var(--color-primary-light); color: var(--color-text); }
+
+    /* ===== LAYOUT ===== */
+    .app-shell { display: flex; min-height: 100dvh; }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: var(--sidebar-width); min-width: var(--sidebar-width);
+      background: var(--color-surface); border-right: 1px solid var(--color-border);
+      display: flex; flex-direction: column; position: sticky; top: 0; height: 100dvh;
+      overflow-y: auto; z-index: 100;
+    }
+    .sidebar-header {
+      padding: 1.5rem 1.25rem 1rem;
+      border-bottom: 1px solid var(--color-divider);
+      position: sticky; top: 0; background: var(--color-surface); z-index: 10;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
+    .logo-icon { width: 36px; height: 36px; flex-shrink: 0; }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; line-height: 1.1; }
+    .logo-sub { font-size: var(--text-xs); color: var(--color-text-muted); display: block; font-family: var(--font-body); font-weight: 400; }
+    .search-wrap { position: relative; }
+    .search-input {
+      width: 100%; padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+      border: 1px solid var(--color-border); border-radius: var(--radius-md);
+      background: var(--color-surface-2); color: var(--color-text);
+      font-family: var(--font-body); font-size: var(--text-sm); transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .search-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-light); }
+    .search-icon { position: absolute; left: 0.65rem; top: 50%; transform: translateY(-50%); color: var(--color-text-faint); pointer-events: none; }
+    .nav-section { padding: 0.75rem 0; border-bottom: 1px solid var(--color-divider); }
+    .nav-section:last-child { border-bottom: none; }
+    .nav-section-label {
+      font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--color-text-faint);
+      padding: 0.25rem 1.25rem 0.5rem; display: block;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.45rem 1.25rem; font-size: var(--text-sm); color: var(--color-text-muted);
+      transition: background var(--transition), color var(--transition);
+      border-radius: 0; cursor: pointer; text-align: left; width: 100%;
+    }
+    .nav-item:hover { background: var(--color-surface-2); color: var(--color-text); }
+    .nav-item.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
+    .nav-item .nav-icon { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.7; }
+    .nav-item.active .nav-icon { opacity: 1; }
+    .nav-badge { margin-left: auto; font-size: 10px; background: var(--color-tag-bg); color: var(--color-tag-text); padding: 1px 6px; border-radius: 99px; font-weight: 600; }
+
+    /* ===== MAIN CONTENT ===== */
+    .main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+    /* ===== TOP BAR ===== */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--color-surface); border-bottom: 1px solid var(--color-border);
+      padding: 0.875rem 2rem; display: flex; align-items: center; justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+    }
+    .topbar-breadcrumb { font-size: var(--text-sm); color: var(--color-text-muted); display: flex; align-items: center; gap: 0.4rem; }
+    .topbar-breadcrumb strong { color: var(--color-text); }
+    .topbar-actions { display: flex; align-items: center; gap: 0.75rem; }
+    .btn-icon {
+      width: 36px; height: 36px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;
+      color: var(--color-text-muted); transition: background var(--transition), color var(--transition);
+    }
+    .btn-icon:hover { background: var(--color-surface-2); color: var(--color-text); }
+    .menu-toggle { display: none; }
+
+    /* ===== CONTENT AREA ===== */
+    .content { padding: 2.5rem 2.5rem 4rem; max-width: 900px; }
+
+    /* ===== HOME / OVERVIEW ===== */
+    .overview-hero {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+      border-radius: var(--radius-xl); padding: 2.5rem; margin-bottom: 2rem;
+      color: white; position: relative; overflow: hidden;
+    }
+    .overview-hero::before {
+      content: ''; position: absolute; top: -40%; right: -10%; width: 300px; height: 300px;
+      background: rgba(255,255,255,0.06); border-radius: 50%; pointer-events: none;
+    }
+    .overview-hero h1 { font-size: var(--text-xl); color: white; margin-bottom: 0.5rem; }
+    .overview-hero p { color: rgba(255,255,255,0.85); max-width: 60ch; font-size: var(--text-base); }
+    .overview-meta { display: flex; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .overview-meta-item { display: flex; align-items: center; gap: 0.4rem; font-size: var(--text-sm); color: rgba(255,255,255,0.8); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card {
+      background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+      padding: 1.25rem; box-shadow: var(--shadow-sm); text-align: center;
+    }
+    .stat-num { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; color: var(--color-primary); line-height: 1; }
+    .stat-label { font-size: var(--text-xs); color: var(--color-text-muted); margin-top: 0.25rem; }
+    .category-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+    .category-card {
+      background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem; cursor: pointer; transition: box-shadow var(--transition), border-color var(--transition), transform var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    .category-card:hover { box-shadow: var(--shadow-md); border-color: var(--color-primary); transform: translateY(-1px); }
+    .cat-icon { width: 42px; height: 42px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; font-size: 1.3rem; }
+    .cat-title { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 600; margin-bottom: 0.25rem; }
+    .cat-desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.5; }
+    .cat-count { font-size: var(--text-xs); color: var(--color-text-faint); margin-top: 0.5rem; }
+
+    /* ===== DISORDER PAGE ===== */
+    .page-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--color-divider); }
+    .page-title { font-size: var(--text-xl); margin-bottom: 0.4rem; }
+    .page-subtitle { font-size: var(--text-base); color: var(--color-text-muted); margin-bottom: 1rem; }
+    .icd-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--color-info-bg); color: var(--color-info);
+      padding: 0.3rem 0.75rem; border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: 600;
+      font-family: var(--font-body); margin-right: 0.5rem;
+    }
+    .evidence-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--color-primary-light); color: var(--color-primary);
+      padding: 0.3rem 0.75rem; border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: 600;
+    }
+    .page-toc { background: var(--color-surface-2); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
+    .page-toc h4 { font-size: var(--text-sm); font-weight: 600; margin-bottom: 0.75rem; font-family: var(--font-body); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+    .toc-list a { font-size: var(--text-sm); color: var(--color-primary); }
+    .toc-list a:hover { text-decoration: underline; }
+
+    /* SECTIONS */
+    .section { margin-bottom: 2.5rem; scroll-margin-top: 90px; }
+    .section-title {
+      font-size: var(--text-lg); font-weight: 600; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .section-title-icon { width: 28px; height: 28px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; background: var(--color-primary-light); flex-shrink: 0; }
+    .prose p { color: var(--color-text); line-height: 1.75; margin-bottom: 1rem; font-size: var(--text-base); }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .prose li { margin-bottom: 0.4rem; line-height: 1.65; }
+    .prose strong { font-weight: 600; color: var(--color-text); }
+    .prose em { font-style: italic; color: var(--color-text-muted); }
+
+    /* INFO BOXES */
+    .info-box { border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; border-left: 4px solid; }
+    .info-box.info { background: var(--color-info-bg); border-color: var(--color-info); }
+    .info-box.warn { background: var(--color-warn-bg); border-color: var(--color-warn); }
+    .info-box.success { background: var(--color-primary-light); border-color: var(--color-primary); }
+    .info-box-title { font-weight: 600; font-size: var(--text-sm); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.4rem; }
+    .info-box.info .info-box-title { color: var(--color-info); }
+    .info-box.warn .info-box-title { color: var(--color-warn); }
+    .info-box.success .info-box-title { color: var(--color-primary); }
+    .info-box p { font-size: var(--text-sm); max-width: 100%; line-height: 1.65; }
+
+    /* CARDS */
+    .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1rem; box-shadow: var(--shadow-sm); }
+    .card-title { font-size: var(--text-base); font-weight: 600; margin-bottom: 0.6rem; font-family: var(--font-display); }
+    .card ul { padding-left: 1.25rem; }
+    .card li { font-size: var(--text-sm); margin-bottom: 0.3rem; line-height: 1.6; }
+
+    /* TWO-COL */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
+    @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* CRITERIA TABLE */
+    .criteria-table { width: 100%; border-collapse: collapse; margin-bottom: 1.25rem; font-size: var(--text-sm); }
+    .criteria-table th { background: var(--color-surface-2); padding: 0.6rem 0.75rem; text-align: left; font-weight: 600; border: 1px solid var(--color-border); color: var(--color-text-muted); font-family: var(--font-body); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.04em; }
+    .criteria-table td { padding: 0.6rem 0.75rem; border: 1px solid var(--color-border); vertical-align: top; line-height: 1.6; }
+    .criteria-table tr:hover td { background: var(--color-surface-2); }
+
+    /* LITERATURE */
+    .lit-item { display: flex; gap: 0.75rem; padding: 0.875rem 0; border-bottom: 1px solid var(--color-divider); }
+    .lit-item:last-child { border-bottom: none; }
+    .lit-num { flex-shrink: 0; width: 24px; height: 24px; background: var(--color-primary-light); color: var(--color-primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: var(--text-xs); font-weight: 700; margin-top: 1px; }
+    .lit-content { flex: 1; }
+    .lit-title { font-size: var(--text-sm); font-weight: 600; color: var(--color-text); line-height: 1.4; margin-bottom: 0.2rem; }
+    .lit-meta { font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.5; }
+    .lit-tag { display: inline-block; background: var(--color-tag-bg); color: var(--color-tag-text); padding: 1px 6px; border-radius: 99px; font-size: 10px; font-weight: 600; margin-left: 0.3rem; }
+    .lit-link { font-size: var(--text-xs); color: var(--color-primary); margin-top: 0.2rem; display: block; }
+
+    /* GUIDELINE BOX */
+    .guideline-box {
+      border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+      overflow: hidden; margin-bottom: 1.25rem;
+    }
+    .guideline-header {
+      background: var(--color-surface-2); padding: 0.875rem 1.25rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .guideline-name { font-weight: 600; font-size: var(--text-sm); }
+    .guideline-org { font-size: var(--text-xs); color: var(--color-text-muted); }
+    .guideline-body { padding: 1rem 1.25rem; }
+    .guideline-body p { font-size: var(--text-sm); color: var(--color-text-muted); max-width: 100%; margin-bottom: 0.5rem; }
+    .guideline-link { display: inline-flex; align-items: center; gap: 0.3rem; font-size: var(--text-xs); color: var(--color-primary); font-weight: 600; }
+
+    /* SEARCH RESULTS */
+    .search-results { display: none; padding: 1rem 0; }
+    .search-results.active { display: block; }
+    .search-result-item { padding: 0.75rem 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); margin-bottom: 0.5rem; cursor: pointer; transition: border-color var(--transition), background var(--transition); background: var(--color-surface); }
+    .search-result-item:hover { border-color: var(--color-primary); background: var(--color-primary-light); }
+    .search-result-title { font-weight: 600; font-size: var(--text-sm); }
+    .search-result-path { font-size: var(--text-xs); color: var(--color-text-muted); margin-top: 0.2rem; }
+    .search-no-results { font-size: var(--text-sm); color: var(--color-text-muted); padding: 1rem; text-align: center; }
+
+    /* PRINT BUTTON */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--color-primary); color: white; padding: 0.5rem 1rem;
+      border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 600;
+      transition: background var(--transition);
+    }
+    .btn-primary:hover { background: var(--color-primary-hover); color: white; }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--color-surface-2); color: var(--color-text); padding: 0.5rem 1rem;
+      border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500;
+      border: 1px solid var(--color-border); transition: background var(--transition), border-color var(--transition);
+    }
+    .btn-secondary:hover { background: var(--color-surface-offset); border-color: var(--color-primary); }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      :root { --sidebar-width: 260px; }
+      .sidebar { position: fixed; left: -280px; height: 100dvh; transition: left var(--transition); z-index: 200; }
+      .sidebar.open { left: 0; }
+      .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 199; }
+      .sidebar-overlay.active { display: block; }
+      .menu-toggle { display: flex; }
+      .content { padding: 1.5rem 1.25rem 3rem; }
+      .topbar { padding: 0.75rem 1.25rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .category-grid { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+    @media print {
+      .sidebar, .topbar { display: none; }
+      .content { padding: 0; }
+      .app-shell { display: block; }
+    }
+
+    /* MISC */
+    .hidden { display: none !important; }
+    .tag { display: inline-block; background: var(--color-tag-bg); color: var(--color-tag-text); padding: 0.2rem 0.6rem; border-radius: 99px; font-size: var(--text-xs); font-weight: 600; margin: 0.15rem; }
+    .divider { border: none; border-top: 1px solid var(--color-divider); margin: 2rem 0; }
+    .text-muted { color: var(--color-text-muted); }
+    .version-note { font-size: var(--text-xs); color: var(--color-text-faint); font-style: italic; }
+    .radius-full { border-radius: 99px; }
+  </style>
+</head>
+<body>
+
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<div class="app-shell">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-wrap">
+        <!-- SVG Logo: Buch mit Gehirn-Motiv -->
+        <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="PsychoEdukation Logo">
+          <rect width="36" height="36" rx="10" fill="var(--color-primary)"/>
+          <path d="M10 10h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H10V10z" fill="white" opacity="0.2"/>
+          <path d="M10 10v18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M10 28h16" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="22" cy="17" r="4.5" stroke="white" stroke-width="1.5" fill="none"/>
+          <path d="M19.5 17c0-1 0.8-1.5 1.5-1.5s1.5.5 1.5 1.5c0 .8-.5 1.2-1 1.5-.5.3-.5.5-.5 1" stroke="white" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+          <circle cx="22" cy="20.5" r="0.4" fill="white"/>
+        </svg>
+        <div class="logo-text">PsychoEdukation
+          <span class="logo-sub">Klinische Bibliothek</span>
+        </div>
+      </div>
+      <div class="search-wrap">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Störungsbild suchen…" autocomplete="off" />
+      </div>
+    </div>
+    <div id="searchResults" class="search-results" style="padding: 0.5rem 0.75rem;"></div>
+    <nav id="mainNav">
+      <div class="nav-section">
+        <span class="nav-section-label">Übersicht</span>
+        <button class="nav-item active" onclick="showPage('home')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Startseite
+        </button>
+        <button class="nav-item" onclick="showPage('nutzung')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          Nutzungshinweise
+        </button>
+      </div>
+      <div class="nav-section">
+        <span class="nav-section-label">Affektive Störungen</span>
+        <button class="nav-item" onclick="showPage('depression')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg>
+          Depression <span class="nav-badge">F32–F33</span>
+        </button>
+        <button class="nav-item" onclick="showPage('bipolar')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Bipolare Störungen <span class="nav-badge">F31</span>
+        </button>
+        <button class="nav-item" onclick="showPage('dysthymie')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Dysthymie / PDD <span class="nav-badge">F34</span>
+        </button>
+      </div>
+      <div class="nav-section">
+        <span class="nav-section-label">Angststörungen</span>
+        <button class="nav-item" onclick="showPage('panik')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Panikstörung / Agoraphobie <span class="nav-badge">F40–F41</span>
+        </button>
+        <button class="nav-item" onclick="showPage('soziale-angst')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Soziale Angststörung <span class="nav-badge">F40.1</span>
+        </button>
+        <button class="nav-item" onclick="showPage('gad')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 5.477 10 10-4.477 10-10 10z"/><path d="M12 8v4l3 3"/></svg>
+          Generalisierte Angststörung <span class="nav-badge">F41.1</span>
+        </button>
+        <button class="nav-item" onclick="showPage('spezifische-phobie')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Spezifische Phobien <span class="nav-badge">F40.2</span>
+        </button>
+      </div>
+      <div class="nav-section">
+        <span class="nav-section-label">Zwang & Trauma</span>
+        <button class="nav-item" onclick="showPage('zwang')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          Zwangsstörung (OCD) <span class="nav-badge">F42</span>
+        </button>
+        <button class="nav-item" onclick="showPage('ptbs')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          PTBS / Komplextrauma <span class="nav-badge">F43</span>
+        </button>
+        <button class="nav-item" onclick="showPage('akute-belastung')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Akute Belastungsreaktion <span class="nav-badge">F43.0</span>
+        </button>
+      </div>
+      <div class="nav-section">
+        <span class="nav-section-label">Persönlichkeit & Emotion</span>
+        <button class="nav-item" onclick="showPage('bps')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Borderline-PS <span class="nav-badge">F60.3</span>
+        </button>
+        <button class="nav-item" onclick="showPage('narzisstisch')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2z"/><path d="M12 12v10"/><path d="M8 16l4-4 4 4"/></svg>
+          Narzisstische PS <span class="nav-badge">F60.8</span>
+        </button>
+        <button class="nav-item" onclick="showPage('ies')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Emotional instabile PS <span class="nav-badge">F60.3</span>
+        </button>
+      </div>
+      <div class="nav-section">
+        <span class="nav-section-label">Psychose & Schizophrenie</span>
+        <button class="nav-item" onclick="showPage('schizophrenie')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Schizophrenie <span class="nav-badge">F20</span>
+        </button>
+        <button class="nav-item" onclick="showPage('psychose')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Schizoaffektiv / Psychosen <span class="nav-badge">F25</span>
+        </button>
+      </div>
+      <div class="nav-section">
+        <span class="nav-section-label">Sucht & Substanzen</span>
+        <button class="nav-item" onclick="showPage('alkohol')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          Alkoholstörung <span class="nav-badge">F10</span>
+        </button>
+        <button class="nav-item" onclick="showPage('substanzen')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+          Substanzstörungen allg. <span class="nav-badge">F11–F19</span>
+        </button>
+      </div>
+      <div class="nav-section">
+        <span class="nav-section-label">Essen & Körper</span>
+        <button class="nav-item" onclick="showPage('essstoerungen')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8c0 7-7 13-7 13S4 15 4 8a7 7 0 0 1 14 0z"/><circle cx="11" cy="8" r="3"/></svg>
+          Essstörungen <span class="nav-badge">F50</span>
+        </button>
+        <button class="nav-item" onclick="showPage('somatisch')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Somatoforme Störungen <span class="nav-badge">F45</span>
+        </button>
+      </div>
+      <div class="nav-section">
+        <span class="nav-section-label">Neurodiversität</span>
+        <button class="nav-item" onclick="showPage('adhs')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          ADHS (Erwachsene) <span class="nav-badge">F90</span>
+        </button>
+        <button class="nav-item" onclick="showPage('autismus')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+          Autismus-Spektrum (ASS) <span class="nav-badge">F84</span>
+        </button>
+      </div>
+      <div class="nav-section">
+        <span class="nav-section-label">Schlaf & Somatisch</span>
+        <button class="nav-item" onclick="showPage('schlaf')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          Schlafstörungen (Insomnien) <span class="nav-badge">F51</span>
+        </button>
+        <button class="nav-item" onclick="showPage('schmerz')">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+          Chron. Schmerz / somatisch <span class="nav-badge">F45.4</span>
+        </button>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <button class="btn-icon menu-toggle" id="menuBtn" onclick="toggleSidebar()" aria-label="Menü öffnen">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="topbar-breadcrumb" id="breadcrumb">
+          <span>Bibliothek</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <strong id="breadcrumbTitle">Startseite</strong>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn-icon" onclick="window.print()" title="Drucken" aria-label="Seite drucken">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+        <button class="btn-icon" data-theme-toggle id="themeToggle" aria-label="Farbmodus wechseln">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- PAGES -->
+    <div class="content" id="pageContent">
+
+      <!-- HOME PAGE -->
+      <div id="page-home">
+        <div class="overview-hero">
+          <h1>Psychoedukations-Bibliothek</h1>
+          <p>Evidenzbasierte Informationen zu psychischen Störungsbildern für Psychotherapeutinnen in der ambulanten Erwachsenentherapie. Auf Basis aktueller S3-Leitlinien und wissenschaftlicher Literatur.</p>
+          <div class="overview-meta">
+            <div class="overview-meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              18 Störungsbilder
+            </div>
+            <div class="overview-meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              S3-Leitlinien integriert
+            </div>
+            <div class="overview-meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Stand: April 2026
+            </div>
+            <div class="overview-meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              ICD-10 & ICD-11
+            </div>
+          </div>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-num">18</div><div class="stat-label">Störungsbilder</div></div>
+          <div class="stat-card"><div class="stat-num">12</div><div class="stat-label">S3-Leitlinien</div></div>
+          <div class="stat-card"><div class="stat-num">100+</div><div class="stat-label">Literaturquellen</div></div>
+          <div class="stat-card"><div class="stat-num">ICD-11</div><div class="stat-label">Kodierung</div></div>
+        </div>
+        <h2 style="font-size:var(--text-lg);margin-bottom:1rem;">Störungsbereiche</h2>
+        <div class="category-grid">
+          <div class="category-card" onclick="showPage('depression')">
+            <div class="cat-icon" style="background:#e8f4ec;">🌧️</div>
+            <div class="cat-title">Affektive Störungen</div>
+            <div class="cat-desc">Depression, Bipolare Störung, Dysthymie – Diagnostik, Psychoedukation und Therapieansätze</div>
+            <div class="cat-count">3 Störungsbilder · F31–F34</div>
+          </div>
+          <div class="category-card" onclick="showPage('panik')">
+            <div class="cat-icon" style="background:#fff0e6;">⚡</div>
+            <div class="cat-title">Angststörungen</div>
+            <div class="cat-desc">Panik, Soziale Phobie, GAD, Spezifische Phobien – Teufelskreismodelle und Exposition</div>
+            <div class="cat-count">4 Störungsbilder · F40–F41</div>
+          </div>
+          <div class="category-card" onclick="showPage('ptbs')">
+            <div class="cat-icon" style="background:#f0e8f8;">⚡</div>
+            <div class="cat-title">Zwang & Trauma</div>
+            <div class="cat-desc">OCD, PTBS, komplexe Traumafolgestörungen – EMDR, Exposition, DBT-basierte Ansätze</div>
+            <div class="cat-count">3 Störungsbilder · F42–F43</div>
+          </div>
+          <div class="category-card" onclick="showPage('bps')">
+            <div class="cat-icon" style="background:#fce8e8;">💙</div>
+            <div class="cat-title">Persönlichkeitsstörungen</div>
+            <div class="cat-desc">Borderline, narzisstische und emotionally instabile PS – DBT, Schematherapie</div>
+            <div class="cat-count">3 Störungsbilder · F60</div>
+          </div>
+          <div class="category-card" onclick="showPage('schizophrenie')">
+            <div class="cat-icon" style="background:#e8eef8;">🧠</div>
+            <div class="cat-title">Psychotische Störungen</div>
+            <div class="cat-desc">Schizophrenie, schizoaffektive Störungen – Vulnerabilitäts-Stress-Modell, Psychoedukation</div>
+            <div class="cat-count">2 Störungsbilder · F20–F25</div>
+          </div>
+          <div class="category-card" onclick="showPage('alkohol')">
+            <div class="cat-icon" style="background:#f8f0e0;">🔄</div>
+            <div class="cat-title">Sucht & Substanzen</div>
+            <div class="cat-desc">Alkohol, illegale Substanzen – Motivationale Gesprächsführung, Rückfallprävention</div>
+            <div class="cat-count">2 Störungsbilder · F10–F19</div>
+          </div>
+          <div class="category-card" onclick="showPage('essstoerungen')">
+            <div class="cat-icon" style="background:#f0f8ec;">🍃</div>
+            <div class="cat-title">Essen & Körperbild</div>
+            <div class="cat-desc">Anorexie, Bulimie, BES, somatoforme Störungen – Körperbildarbeit, KVT</div>
+            <div class="cat-count">2 Störungsbilder · F45–F50</div>
+          </div>
+          <div class="category-card" onclick="showPage('adhs')">
+            <div class="cat-icon" style="background:#fff8e0;">⚙️</div>
+            <div class="cat-title">Neurodiversität & Schlaf</div>
+            <div class="cat-desc">ADHS, ASS, Insomnien, chronische Schmerzen – neurobiologische Grundlagen</div>
+            <div class="cat-count">4 Störungsbilder · F51–F90</div>
+          </div>
+        </div>
+
+        <hr class="divider">
+        <div class="info-box info">
+          <div class="info-box-title">ℹ️ Zur Nutzung dieser Bibliothek</div>
+          <p>Diese Bibliothek richtet sich ausschließlich an approbierte Psychotherapeutinnen und Psychotherapeuten sowie Psychotherapeutinnen in Ausbildung (PiA). Die Inhalte dienen der klinischen Psychoedukation und ersetzen nicht die fachärztliche oder psychotherapeutische Diagnosestellung. Alle Informationen basieren auf aktuellen deutschen S3-Leitlinien und peer-reviewter Fachliteratur.</p>
+        </div>
+      </div>
+
+      <!-- NUTZUNG PAGE -->
+      <div id="page-nutzung" class="hidden">
+        <div class="page-header">
+          <h1 class="page-title">Nutzungshinweise</h1>
+          <p class="page-subtitle">Wie Sie diese Bibliothek optimal in Ihrer therapeutischen Arbeit einsetzen</p>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📋</span> Aufbau der Kapitel</h2>
+          <div class="prose">
+            <p>Jedes Störungskapitel ist nach einem einheitlichen Schema aufgebaut und enthält folgende Abschnitte:</p>
+          </div>
+          <div class="two-col">
+            <div class="card">
+              <div class="card-title">🔍 Klinisches Bild & Diagnostik</div>
+              <ul><li>Kernsymptome nach ICD-10/ICD-11</li><li>Diagnostische Kriterien</li><li>Differenzialdiagnosen</li><li>Komorbidität</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">🧬 Ätiologie & Modelle</div>
+              <ul><li>Biopsychosoziale Modelle</li><li>Kognitiv-behaviorale Erklärungsmodelle</li><li>Neurobiologische Grundlagen</li><li>Psychoedukationsmodelle</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">🛠️ Psychotherapeutische Ansätze</div>
+              <ul><li>Evidenzbasierte Interventionen</li><li>Leitlinienempfehlungen (Empfehlungsgrade)</li><li>Konkrete Techniken</li><li>Ressourcen für Klientinnen</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">📚 Literatur & Leitlinien</div>
+              <ul><li>Primärliteratur (RCTs, Metaanalysen)</li><li>Standardwerke (Hogrefe, Springer)</li><li>Patientenliteratur</li><li>Online-Ressourcen (AWMF, DGPPN)</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🏷️</span> Leitlinien & Evidenzgrade</h2>
+          <div class="prose">
+            <p>Die Leitlinienempfehlungen folgen dem deutschen AWMF-System. Empfehlungsgrade:</p>
+          </div>
+          <table class="criteria-table">
+            <thead><tr><th>Empfehlungsgrad</th><th>Symbol</th><th>Bedeutung</th></tr></thead>
+            <tbody>
+              <tr><td>A (Soll)</td><td><span class="tag">↑↑</span></td><td>Starke Empfehlung; basiert auf hoher Evidenz (IA/IB)</td></tr>
+              <tr><td>B (Sollte)</td><td><span class="tag">↑</span></td><td>Empfehlung; basiert auf moderater Evidenz (IIA/IIB)</td></tr>
+              <tr><td>0 (Kann)</td><td><span class="tag">↔</span></td><td>Offene Empfehlung; schwächere Evidenz oder Expertenkonsens</td></tr>
+              <tr><td>KKP</td><td><span class="tag">KKP</span></td><td>Klinischer Konsenspunkt; gute klinische Praxis</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- DEPRESSION PAGE -->
+      <div id="page-depression" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F32–F33</span><span class="icd-badge">ICD-11: 6A70–6A71</span>
+          <span class="evidence-badge">S3-Leitlinie verfügbar</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">Depression</h1>
+          <p class="page-subtitle">Depressive Episode, Rezidivierende depressive Störung – Psychoedukation für die ambulante Praxis</p>
+          <div><span class="tag">Affektive Störung</span><span class="tag">KVT</span><span class="tag">Verhaltensaktivierung</span><span class="tag">Pharmakotherapie</span></div>
+        </div>
+        <div class="page-toc">
+          <h4>Inhalt</h4>
+          <ol class="toc-list">
+            <li><a href="#dep-klinik">1. Klinisches Bild & Diagnostik</a></li>
+            <li><a href="#dep-aetio">2. Ätiologie & psychoedukative Modelle</a></li>
+            <li><a href="#dep-schwere">3. Schweregradbestimmung</a></li>
+            <li><a href="#dep-therapie">4. Psychotherapeutische Ansätze</a></li>
+            <li><a href="#dep-leitlinien">5. Leitlinien</a></li>
+            <li><a href="#dep-lit">6. Literatur & Quellen</a></li>
+          </ol>
+        </div>
+
+        <div class="section" id="dep-klinik">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Klinisches Bild & Diagnostik</h2>
+          <div class="prose">
+            <p><strong>Kernsymptome</strong> nach ICD-10 (mindestens 2 von 3 für mindestens 2 Wochen):</p>
+          </div>
+          <div class="two-col">
+            <div class="card">
+              <div class="card-title">Kernsymptome (ICD-10)</div>
+              <ul>
+                <li><strong>Gedrückte Stimmung</strong> – subjektiv oder beobachtbar</li>
+                <li><strong>Interessenverlust / Freudlosigkeit</strong> – Anhedonie</li>
+                <li><strong>Antriebsminderung</strong> – erhöhte Ermüdbarkeit</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Zusatzsymptome (4 Kategorien)</div>
+              <ul>
+                <li>Konzentrations- & Gedächtnisschwäche</li>
+                <li>Vermindertes Selbstwertgefühl</li>
+                <li>Schuldgefühle / Gefühl der Wertlosigkeit</li>
+                <li>Psychomotorische Hemmung / Agitiertheit</li>
+                <li>Schlafstörungen (meist frühmorgendliches Erwachen)</li>
+                <li>Appetit-/Gewichtsveränderung</li>
+                <li>Suizidgedanken / -handlungen</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box warn">
+            <div class="info-box-title">⚠️ Suizidalität – immer explorieren</div>
+            <p>Suizidgedanken gehören zu den Zusatzsymptomen einer Depression und müssen aktiv erfragt werden. Suizidgedanken zu erfragen erhöht nicht die Suizidgefahr (Studienbelege: Gould et al., 2005). Strukturierte Suizidabklärung nach DGPPN-Leitlinie empfohlen.</p>
+          </div>
+          <div class="prose">
+            <p><strong>Differenzialdiagnosen:</strong> Bipolare Störung (hypomanische/manische Episoden in der Vorgeschichte?), Dysthymie (chronisch, mind. 2 Jahre, weniger schwer), organische Depression (Hypothyreose, Anämie, Morbus Parkinson), substanzinduziert, Trauerreaktion (zeitlich begrenzt, keine ausgeprägte Anhedonie).</p>
+            <p><strong>Häufige Komorbiditäten:</strong> Angststörungen (~50%), Substanzstörungen (~30%), Persönlichkeitsstörungen (~30%), somatische Erkrankungen.</p>
+          </div>
+        </div>
+
+        <div class="section" id="dep-aetio">
+          <h2 class="section-title"><span class="section-title-icon">🧬</span> Ätiologie & psychoedukative Modelle</h2>
+          <div class="info-box success">
+            <div class="info-box-title">✅ Psychoedukatives Kernmodell: Biopsychosoziales Modell</div>
+            <p>Depression entsteht nicht durch einen einzigen Faktor, sondern durch das Zusammenspiel von biologischen Dispositionen (Genetik, Neurobiologie), psychologischen Faktoren (kognitive Muster, Coping-Strategien) und sozialen/Umweltfaktoren (Stressoren, soziale Unterstützung). Dies normalisiert die Erkrankung und reduziert Schuld.</p>
+          </div>
+          <div class="two-col">
+            <div class="card">
+              <div class="card-title">🧬 Biologische Faktoren</div>
+              <ul>
+                <li>Genetische Vulnerabilität (~40% Heritabilität)</li>
+                <li>Serotonerges, noradrenerges & dopaminerges System</li>
+                <li>HPA-Achsen-Dysregulation (Kortisol)</li>
+                <li>Neuroplastizität (BDNF-Verringerung)</li>
+                <li>Entzündungsprozesse (Zytokine)</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">🧠 Kognitive Faktoren (Beck)</div>
+              <ul>
+                <li>Kognitive Triade: neg. Selbst, Welt, Zukunft</li>
+                <li>Automatische negative Gedanken</li>
+                <li>Kognitive Verzerrungen (Katastrophisieren, Übergeneralisierung)</li>
+                <li>Depressogene Grundannahmen & Schemata</li>
+                <li>Selektive Aufmerksamkeit auf Negatives</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">🔄 Verhaltens-Teufelskreis (Lewinsohn)</div>
+              <ul>
+                <li>Rückzug → Verlust positiver Verstärker</li>
+                <li>Reduzierte Aktivität → mehr Grübeln</li>
+                <li>Grübeln → neg. Stimmung</li>
+                <li>Schlechtere Stimmung → weniger Aktivität</li>
+                <li>Grundlage der Verhaltensaktivierung</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">🌍 Soziale & Umweltfaktoren</div>
+              <ul>
+                <li>Kritische Lebensereignisse (Verluste, Traumata)</li>
+                <li>Chronische Stressoren (Beruf, Beziehung)</li>
+                <li>Mangelnde soziale Unterstützung</li>
+                <li>Dysfunktionale Bindungsmuster</li>
+                <li>Childhood Adversity (ACE)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="section" id="dep-schwere">
+          <h2 class="section-title"><span class="section-title-icon">📊</span> Schweregradbestimmung</h2>
+          <table class="criteria-table">
+            <thead><tr><th>Schweregrad</th><th>Kernsymptome</th><th>Zusatzsymptome</th><th>Funktionsfähigkeit</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Leicht</strong> (F32.0)</td><td>2 von 3</td><td>2–3</td><td>Eingeschränkt, aber möglich</td></tr>
+              <tr><td><strong>Mittelgradig</strong> (F32.1)</td><td>2 von 3</td><td>4–5</td><td>Erhebliche Schwierigkeiten</td></tr>
+              <tr><td><strong>Schwer ohne Psychose</strong> (F32.2)</td><td>alle 3</td><td>≥6</td><td>Kaum möglich</td></tr>
+              <tr><td><strong>Schwer mit Psychose</strong> (F32.3)</td><td>alle 3</td><td>≥6</td><td>Nicht möglich; Wahnideen</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box info">
+            <div class="info-box-title">📋 Screening-Instrumente</div>
+            <p><strong>PHQ-9</strong> (Patient Health Questionnaire): Standardscreening, frei verfügbar, gut validiert für ambulante Praxis. <strong>BDI-II</strong> (Beck-Depressions-Inventar): Goldstandard für Verlaufsdiagnostik. <strong>HAMD-17</strong>: Fremdrating, bei schweren Verläufen. <strong>MADRS</strong>: Sensibel für Veränderungen unter Therapie.</p>
+          </div>
+        </div>
+
+        <div class="section" id="dep-therapie">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> Psychotherapeutische Ansätze</h2>
+          <div class="info-box success">
+            <div class="info-box-title">↑↑ Empfehlung Grad A – S3-Leitlinie</div>
+            <p>Kognitive Verhaltenstherapie (KVT) ist bei leichten bis mittelschweren Depressionen der Pharmakotherapie gleichwertig und wird als Erstlinienbehandlung empfohlen. Bei schwerer Depression Kombinationsbehandlung bevorzugen.</p>
+          </div>
+          <div class="two-col">
+            <div class="card">
+              <div class="card-title">Verhaltensaktivierung (BA)</div>
+              <ul>
+                <li>Aktivitätenprotokoll: Stimmungs-Aktivitäts-Tagebuch</li>
+                <li>Identifikation positiver Verstärker</li>
+                <li>Schrittweise Aktivitätssteigerung (Mastery & Pleasure)</li>
+                <li>Grübel-Stopp-Techniken / Grübelstühle</li>
+                <li><em>Evidenz: Ekers et al., 2014 (Metaanalyse, k=26)</em></li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Kognitive Umstrukturierung (Beck)</div>
+              <ul>
+                <li>Gedankenprotokolle (5-Spalten-Schema)</li>
+                <li>Sokratischer Dialog</li>
+                <li>Kognitive Umstrukturierung neg. Gedanken</li>
+                <li>Verhaltensexperimente</li>
+                <li>Grundannahmen / Schemata bearbeiten</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">MBCT (Achtsamkeitsbasierte KVT)</div>
+              <ul>
+                <li>Bei rezidivierender Depression ≥3 Episoden</li>
+                <li>Reduktion des Rückfallrisikos um 44%</li>
+                <li>Teasdale et al. (2000), Kuyken et al. (2016)</li>
+                <li>8-Wochen-Programm; Mindfulness-Übungen</li>
+                <li>Grübeln erkennen und loslassen</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="card-title">IPT (Interpersonelle Therapie)</div>
+              <ul>
+                <li>Trauer, Rollenwechsel, interpers. Konflikte</li>
+                <li>Verlust und Trauerarbeit</li>
+                <li>Verbesserung der sozialen Kompetenz</li>
+                <li>Ähnlich wirksam wie KVT (Cuijpers et al., 2011)</li>
+                <li>Besonders bei interpersonellen Auslösern</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card" style="background:var(--color-surface-2);">
+            <div class="card-title">📋 Psychoedukation im Erstgespräch – Kernbotschaften</div>
+            <ul>
+              <li>Depression ist eine <strong>Erkrankung</strong>, keine Willensschwäche oder Charakterfehler</li>
+              <li>Sie ist <strong>gut behandelbar</strong>: 70–80% sprechen auf Therapie an</li>
+              <li>Biologische, psychologische und soziale Faktoren wirken zusammen</li>
+              <li>Antriebslosigkeit gehört zur Erkrankung – kleine Schritte helfen</li>
+              <li>Die Therapie ist ein aktiver, gemeinsamer Prozess</li>
+              <li>Rückfälle gehören oft dazu und sind kein Versagen</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section" id="dep-leitlinien">
+          <h2 class="section-title"><span class="section-title-icon">📜</span> Leitlinien</h2>
+          <div class="guideline-box">
+            <div class="guideline-header">
+              <div><div class="guideline-name">S3-Leitlinie / NVL Unipolare Depression</div><div class="guideline-org">DGPPN, BÄK, KBV, AWMF · 3. Auflage 2022</div></div>
+              <span class="tag">S3 / NVL</span>
+            </div>
+            <div class="guideline-body">
+              <p>Umfassende Leitlinie zu Diagnostik, Therapie und Versorgung der unipolaren Depression. Empfehlungen zu Pharmako-, Psycho- und Kombinationstherapie; stufenweise Versorgung; Krisenintervention.</p>
+              <a class="guideline-link" href="https://www.leitlinien.de/nvl/html/depression/version-3/kapitel-3" target="_blank">→ AWMF / NVL Depression (leitlinien.de)</a>
+            </div>
+          </div>
+          <div class="guideline-box">
+            <div class="guideline-header">
+              <div><div class="guideline-name">NICE Guideline CG90: Depression in Adults</div><div class="guideline-org">National Institute for Health and Care Excellence · 2022 Update</div></div>
+              <span class="tag">International</span>
+            </div>
+            <div class="guideline-body">
+              <p>Empfehlungen für ein Stepped-Care-Modell, Psychotherapie-Auswahl (KVT, IPT, BA, Paartherapie) und Pharmakotherapie. Besonders relevant für Evidenzgradierung.</p>
+              <a class="guideline-link" href="https://www.nice.org.uk/guidance/cg90" target="_blank">→ NICE CG90 (nice.org.uk)</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="section" id="dep-lit">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur & Quellen</h2>
+          <div class="lit-item">
+            <div class="lit-num">1</div>
+            <div class="lit-content">
+              <div class="lit-title">Hautzinger, M. (2013). Kognitive Verhaltenstherapie bei Depressionen.</div>
+              <div class="lit-meta">Beltz/PVU, 7. Auflage. ISBN: 978-3621278478 <span class="lit-tag">Standardwerk</span></div>
+              <a class="lit-link" href="https://www.beltz.de/fachmedien/psychologie/produkte/details/34070-kognitive-verhaltenstherapie-bei-depressionen.html" target="_blank">→ Verlag Beltz</a>
+            </div>
+          </div>
+          <div class="lit-item">
+            <div class="lit-num">2</div>
+            <div class="lit-content">
+              <div class="lit-title">Cuijpers, P. et al. (2019). A network meta-analysis of the relative efficacy of psychotherapies for depression.</div>
+              <div class="lit-meta">World Psychiatry, 18(1), 92–107. DOI: 10.1002/wps.20701 <span class="lit-tag">Metaanalyse</span></div>
+              <a class="lit-link" href="https://doi.org/10.1002/wps.20701" target="_blank">→ DOI: 10.1002/wps.20701</a>
+            </div>
+          </div>
+          <div class="lit-item">
+            <div class="lit-num">3</div>
+            <div class="lit-content">
+              <div class="lit-title">Kuyken, W. et al. (2016). Efficacy of mindfulness-based cognitive therapy in prevention of depressive relapse.</div>
+              <div class="lit-meta">JAMA Psychiatry, 73(6), 565–574. DOI: 10.1001/jamapsychiatry.2016.0076 <span class="lit-tag">RCT</span></div>
+              <a class="lit-link" href="https://doi.org/10.1001/jamapsychiatry.2016.0076" target="_blank">→ DOI: 10.1001/jamapsychiatry.2016.0076</a>
+            </div>
+          </div>
+          <div class="lit-item">
+            <div class="lit-num">4</div>
+            <div class="lit-content">
+              <div class="lit-title">Hegerl, U. & Vauth, R. (Hrsg.) (2020). Therapie psychischer Erkrankungen – State of the Art.</div>
+              <div class="lit-meta">Urban & Fischer/Elsevier. <span class="lit-tag">Klinikhandbuch</span></div>
+            </div>
+          </div>
+          <div class="lit-item">
+            <div class="lit-num">5</div>
+            <div class="lit-content">
+              <div class="lit-title">Lewinsohn, P. M. et al. (1985). Control your depression. Prentice-Hall.</div>
+              <div class="lit-meta">Verhaltensaktivierungs-Grundlagenwerk <span class="lit-tag">Klassiker</span></div>
+            </div>
+          </div>
+          <div class="lit-item">
+            <div class="lit-num">6</div>
+            <div class="lit-content">
+              <div class="lit-title">Ekers, D. et al. (2014). Behavioural activation for depression; an update of meta-analysis.</div>
+              <div class="lit-meta">PLOS ONE, 9(6), e100100. <span class="lit-tag">Metaanalyse</span></div>
+              <a class="lit-link" href="https://doi.org/10.1371/journal.pone.0100100" target="_blank">→ DOI: 10.1371/journal.pone.0100100</a>
+            </div>
+          </div>
+          <div class="lit-item">
+            <div class="lit-num">7</div>
+            <div class="lit-content">
+              <div class="lit-title">Patientenliteratur: Bowes, A. (2014). Stimmungstagebuch & Verhaltensaktivierung. Beltz.</div>
+              <div class="lit-meta">Für Klientinnen geeignet <span class="lit-tag">Patientenliteratur</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANIK PAGE -->
+      <div id="page-panik" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F40.0, F41.0</span><span class="icd-badge">ICD-11: 6B01, 6B00</span>
+          <span class="evidence-badge">S3-Leitlinie verfügbar</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">Panikstörung & Agoraphobie</h1>
+          <p class="page-subtitle">Teufelskreis der Angst, Exposition und kognitives Modell</p>
+          <div><span class="tag">Angststörung</span><span class="tag">KVT</span><span class="tag">Exposition</span><span class="tag">Interozetive Exposition</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Klinisches Bild & Diagnostik</h2>
+          <div class="prose">
+            <p><strong>Panikattacke:</strong> Abrupte Intensitätssteigerung von Angst/Unbehagen, Gipfel innerhalb von Minuten. Mindestens 4 der folgenden Symptome:</p>
+          </div>
+          <div class="two-col">
+            <div class="card">
+              <div class="card-title">Körperliche Symptome</div>
+              <ul><li>Herzklopfen / Pulsrasen</li><li>Schwitzen</li><li>Zittern / Beben</li><li>Kurzatmigkeit / Erstickungsgefühl</li><li>Brustschmerz / -beklemmung</li><li>Übelkeit / Magen-Darm-Beschwerden</li><li>Schwindel / Benommenheit</li><li>Kribbeln / Taubheitsgefühle</li><li>Hitzewallungen / Kälteschauer</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Kognitive & Dissoziative Symptome</div>
+              <ul><li>Derealisation / Depersonalisation</li><li>Angst die Kontrolle zu verlieren</li><li>Angst „verrückt zu werden"</li><li>Todesangst / Herzinfarktangst</li></ul>
+              <br><strong>Panikstörung:</strong> Wiederkehrende Panikattacken + persistierende Sorge vor weiteren Attacken (mind. 1 Monat) + Vermeidungsverhalten oder Sicherheitsverhalten.
+            </div>
+          </div>
+          <div class="info-box info">
+            <div class="info-box-title">ℹ️ Agoraphobie (F40.0)</div>
+            <p>Angst vor Situationen, in denen Flucht schwierig oder Hilfe nicht verfügbar ist: Menschenmengen, Warteschlangen, öffentliche Verkehrsmittel, Alleinsein außer Haus, Weite/Enge Räume. Häufig komorbid mit Panikstörung (~50%), aber auch ohne Panikstörung möglich.</p>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🧬</span> Teufelskreis-Modell (Clark, 1986)</h2>
+          <div class="card" style="background: var(--color-surface-2);">
+            <div class="card-title">Kognitives Modell der Panikstörung</div>
+            <div style="text-align:center; padding: 1rem; font-size: var(--text-sm); line-height: 2.2;">
+              <div style="display:inline-block; background: var(--color-primary-light); border: 1px solid var(--color-primary); border-radius: var(--radius-md); padding: 0.4rem 1rem; color: var(--color-primary);">Auslöser (intern/extern)</div>
+              <div>↓</div>
+              <div style="display:inline-block; background: var(--color-warn-bg); border: 1px solid var(--color-warn); border-radius: var(--radius-md); padding: 0.4rem 1rem; color: var(--color-warn);">Wahrgenommene Bedrohung</div>
+              <div>↓</div>
+              <div style="display:inline-block; background: #fce8e8; border: 1px solid #c0392b; border-radius: var(--radius-md); padding: 0.4rem 1rem; color: #c0392b;">Angst / Unbehagen</div>
+              <div>↓</div>
+              <div style="display:inline-block; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 0.4rem 1rem;">Körperliche Symptome</div>
+              <div>↓</div>
+              <div style="display:inline-block; background: var(--color-warn-bg); border: 1px solid var(--color-warn); border-radius: var(--radius-md); padding: 0.4rem 1rem; color: var(--color-warn);">Katastrophisierende Interpretation<br><small style="font-weight:normal;">"Herzinfarkt!" / "Ich sterbe!"</small></div>
+              <div>↗ → → → → → → → ↑ (Teufelskreis)</div>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> Therapeutische Interventionen</h2>
+          <div class="two-col">
+            <div class="card">
+              <div class="card-title">Psychoedukation & Normalisierung</div>
+              <ul><li>Angst als evolutionär sinnvolle Reaktion erklären</li><li>Kampf-Flucht-Reaktion (Adrenalin) vermitteln</li><li>Panikattacken sind nicht gefährlich</li><li>Der Teufelskreis als Modell gemeinsam erarbeiten</li><li>Sicherheitsverhalten identifizieren & hinterfragen</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Exposition in vivo & interozetiv</div>
+              <ul><li>Exposition in vivo: Angsthierarchie aufbauen</li><li>Interozetive Exposition: Körpersymptome provozieren (Hyperventilieren, Drehen, Treppe)</li><li>Ohne Sicherheitsverhalten / Ablenkung</li><li>Habituation & Erwartungskorrektur</li><li>Evidenz: ↑↑ A-Empfehlung (NVL Angst)</li></ul>
+            </div>
+          </div>
+          <div class="guideline-box">
+            <div class="guideline-header"><div><div class="guideline-name">S3-Leitlinie Angststörungen (AWMF 051-028)</div><div class="guideline-org">DGPPN · 2021</div></div><span class="tag">S3</span></div>
+            <div class="guideline-body"><p>Therapie erster Wahl: KVT mit Exposition; SSRI/SNRI bei mittlerer-schwerer Ausprägung. Kombination KVT + Pharmakotherapie bei schweren Fällen.</p><a class="guideline-link" href="https://www.awmf.org/leitlinien/detail/ll/051-028.html" target="_blank">→ AWMF 051-028</a></div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">Clark, D. M. (1986). A cognitive approach to panic. Behaviour Research and Therapy, 24, 461–470.</div><div class="lit-meta">Grundlegendes kognitives Modell der Panikstörung <span class="lit-tag">Klassiker</span></div><a class="lit-link" href="https://doi.org/10.1016/0005-7967(86)90141-3" target="_blank">→ DOI</a></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">Margraf, J. & Schneider, S. (2018). Panik – Angstanfälle und ihre Behandlung. Springer.</div><div class="lit-meta">Standardwerk für Klinik und Forschung <span class="lit-tag">Standardwerk</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">3</div><div class="lit-content"><div class="lit-title">Wittchen, H.-U. et al. (2010). The size and burden of mental disorders and other disorders of the brain in Europe. European Neuropsychopharmacology, 21, 655–679.</div><div class="lit-meta">Epidemiologie <span class="lit-tag">Epidemiologie</span></div><a class="lit-link" href="https://doi.org/10.1016/j.euroneuro.2011.07.018" target="_blank">→ DOI</a></div></div>
+        </div>
+      </div>
+
+      <!-- PTBS PAGE -->
+      <div id="page-ptbs" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F43.1</span><span class="icd-badge">ICD-11: 6B40–6B41</span>
+          <span class="evidence-badge">S3-Leitlinie verfügbar</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">PTBS & Komplexe Traumafolgestörungen</h1>
+          <p class="page-subtitle">Posttraumatische Belastungsstörung, komplexe PTBS (kPTBS) – Diagnostik, Modelle und traumafokussierte Therapie</p>
+          <div><span class="tag">Traumafolgestörung</span><span class="tag">EMDR</span><span class="tag">PE</span><span class="tag">KVT</span><span class="tag">DBT-PTBS</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Diagnostik & Kernsymptome</h2>
+          <div class="two-col">
+            <div class="card">
+              <div class="card-title">B-Kriterien: Intrusionen</div>
+              <ul><li>Flashbacks / Nachhallerinnerungen</li><li>Albträume / Intrusionen im Schlaf</li><li>Psychischer Distress bei Reizen</li><li>Physiolog. Reaktionen auf Triggerreize</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">C-Kriterien: Vermeidung</div>
+              <ul><li>Gedankenunterdrückung traumabezogen</li><li>Vermeidung äußerer Erinnerungen</li><li>Emotionale Taubheit / Numbing</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">D-Kriterien: Neg. Kognition & Stimmung</div>
+              <ul><li>Neg. Überzeugungen (Selbst, Welt)</li><li>Selbstvorwürfe / Schuldgefühle</li><li>Emotional Constriction</li><li>Interessenverlust, Entfremdung</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">E-Kriterien: Hyperarousal</div>
+              <ul><li>Übermäßige Schreckhaftigkeit</li><li>Schlafstörungen</li><li>Reizbarkeit / Wutausbrüche</li><li>Konzentrationsprobleme</li><li>Hypervigilanz</li></ul>
+            </div>
+          </div>
+          <div class="info-box info">
+            <div class="info-box-title">ℹ️ Komplexe PTBS (ICD-11: 6B41)</div>
+            <p>Die kPTBS ist erstmals in ICD-11 als eigene Diagnose gelistet. Zusätzlich zur PTBS: <strong>Affektregulationsstörungen</strong> (Gefühle als überwältigend erlebt), <strong>negative Selbstwahrnehmung</strong> (Gefühl der Beschädigung/Wertlosigkeit), <strong>Beziehungsstörungen</strong> (Schwierigkeiten in engen Beziehungen). Typisch bei prolongierten, wiederholten Traumata (Misshandlung, Vernachlässigung, politische Gewalt).</p>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🧬</span> Ätiologische Modelle</h2>
+          <div class="two-col">
+            <div class="card">
+              <div class="card-title">Duales Repräsentationsmodell (Brewin, 2001)</div>
+              <ul><li>VAMs (Verbally Accessible Memories): narrativ zugänglich</li><li>SAMs (Situationally Accessible Memories): sensorisch-automatisch, triggern Flashbacks</li><li>Therapieziel: SAMs in VAMs überführen</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Kognitive Modell der PTBS (Ehlers & Clark, 2000)</div>
+              <ul><li>Traumagedächtnis schlecht elaboriert/kontextualisiert</li><li>Excessive neg. Appraisals ("Es war meine Schuld")</li><li>Dysfunktionale Strategien halten PTBS aufrecht</li><li>Basis der Prolonged Exposure & EMDR</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> Evidenzbasierte Therapieverfahren</h2>
+          <div class="info-box success">
+            <div class="info-box-title">↑↑ Erstlinienbehandlung (S3-Leitlinie)</div>
+            <p>Traumafokussierte Psychotherapie (Prolonged Exposure, EMDR, CPT) ist Pharmakotherapie überlegen. EMDR und PE haben die stärkste Evidenz. Stabilisierung als Vorphase bei schwerem Dissoziation/kPTBS.</p>
+          </div>
+          <div class="two-col">
+            <div class="card">
+              <div class="card-title">EMDR (Eye Movement Desensitization Reprocessing)</div>
+              <ul><li>Bilaterale Stimulation (Augenbewegungen, Töne, Klopfen)</li><li>Adaptive Informationsverarbeitung (AIP-Modell)</li><li>Traumaprozessierung in Sitzungen</li><li>WHO-empfohlen; starke Evidenz (Lee & Cuijpers, 2013)</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Prolonged Exposure (PE, Foa et al.)</div>
+              <ul><li>Exposition in sensu: Traumaerinnerung narrativ</li><li>Exposition in vivo: Vermeidungsauflösung</li><li>Korrektur von Über-Generalisierung der Gefahr</li><li>Sehr gut belegt; Foa et al. (2007)</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Kognitive Prozesstherapie (CPT)</div>
+              <ul><li>Identifikation von "Sticking Points" (neg. Überzeugungen)</li><li>Worksheets: Challenging Beliefs</li><li>Besonders bei Schuld und Scham</li><li>Resick et al. (2002); A-Empfehlung</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">DBT-PTSD (Bohus et al.)</div>
+              <ul><li>Bei kPTBS mit ausgeprägter Emotionsdysregulation</li><li>Stabilisierung → Traumabearbeitung</li><li>Verhaltensanalysen, Skills, Exposition</li><li>Bohus et al. (2013, 2020): RCT-belegt</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">Ehlers, A. & Clark, D. M. (2000). A cognitive model of posttraumatic stress disorder. Behaviour Research and Therapy, 38(4), 319–345.</div><div class="lit-meta">Grundlegendes kognitives PTBS-Modell <span class="lit-tag">Klassiker</span></div><a class="lit-link" href="https://doi.org/10.1016/S0005-7967(99)00123-0" target="_blank">→ DOI</a></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">Shapiro, F. (2018). Eye Movement Desensitization and Reprocessing (EMDR) Therapy. 3rd ed. Guilford Press.</div><div class="lit-meta">EMDR-Standardwerk <span class="lit-tag">Standardwerk</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">3</div><div class="lit-content"><div class="lit-title">Bohus, M. et al. (2020). Dialectical Behavior Therapy for Posttraumatic Stress Disorder (DBT-PTSD). JAMA Psychiatry.</div><div class="lit-meta">RCT zur DBT-PTSD <span class="lit-tag">RCT</span></div><a class="lit-link" href="https://doi.org/10.1001/jamapsychiatry.2020.0532" target="_blank">→ DOI</a></div></div>
+          <div class="lit-item"><div class="lit-num">4</div><div class="lit-content"><div class="lit-title">S3-Leitlinie PTBS: Flatten et al. (2011/2019). Trauma und PTBS – Leitlinie S3. AWMF 051-010.</div><div class="lit-meta"><span class="lit-tag">S3-Leitlinie</span></div><a class="lit-link" href="https://www.awmf.org/leitlinien/detail/ll/051-010.html" target="_blank">→ AWMF 051-010</a></div></div>
+        </div>
+      </div>
+
+      <!-- BPS PAGE -->
+      <div id="page-bps" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F60.3</span><span class="icd-badge">ICD-11: 6D11.5</span>
+          <span class="evidence-badge">S2k-Leitlinie</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">Borderline-Persönlichkeitsstörung</h1>
+          <p class="page-subtitle">Emotional instabile Persönlichkeitsstörung vom Borderline-Typ – DBT, Schematherapie, MBT</p>
+          <div><span class="tag">Persönlichkeitsstörung</span><span class="tag">DBT</span><span class="tag">Schematherapie</span><span class="tag">MBT</span><span class="tag">Emotionsregulation</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Diagnostik – DSM-5 / ICD-10</h2>
+          <div class="prose"><p>Mindestens <strong>5 von 9</strong> Kriterien (DSM-5), beginnend im frühen Erwachsenenalter:</p></div>
+          <table class="criteria-table">
+            <thead><tr><th>#</th><th>Kriterium</th><th>Klinischer Hinweis</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Verzweifeltes Bemühen, Verlassenwerden zu vermeiden</td><td>Auch wahrgenommenes Verlassenwerden</td></tr>
+              <tr><td>2</td><td>Instabile, intensive Beziehungen (Idealisierung ↔ Entwertung)</td><td>Splitting / Black-White-Thinking</td></tr>
+              <tr><td>3</td><td>Identitätsstörung / instabiles Selbstbild</td><td>Leere, Diffusität, Rollenlosigkeit</td></tr>
+              <tr><td>4</td><td>Impulsivität in mind. 2 potenziell selbstschädigenden Bereichen</td><td>Sex, Substanzen, Fahren, Essen, Geld</td></tr>
+              <tr><td>5</td><td>Suizidales Verhalten / selbstverletzendes Verhalten</td><td>Parasuizid, NV-SVV</td></tr>
+              <tr><td>6</td><td>Affektive Instabilität (intensive episodische Dysphorie, Reizbarkeit, Angst)</td><td>Meist Stunden, selten Tage</td></tr>
+              <tr><td>7</td><td>Chronisches Gefühl der Leere</td><td>Innere Taubheit, Nichts-Fühlen</td></tr>
+              <tr><td>8</td><td>Unangemessene intensive Wut oder Schwierigkeiten, Wut zu kontrollieren</td><td>Wutanfälle, Sarkasmus</td></tr>
+              <tr><td>9</td><td>Vorübergehende stressbezogene Paranoia oder dissoziative Symptome</td><td>Ausgelöst durch interpersonellen Stress</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🧬</span> Ätiologisches Modell</h2>
+          <div class="two-col">
+            <div class="card">
+              <div class="card-title">Biosoziales Modell (Linehan, 1993)</div>
+              <ul><li>Biologische Vulnerabilität für emotionale Sensitivität</li><li>Invalidierende Umgebung in der Kindheit</li><li>Wechselwirkung → BPS-Symptomatik</li><li>Hohe Sensitivität + langsame Erholung</li><li>Basis aller DBT-Psychoedukation</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Schemamodell (Young, 2003)</div>
+              <ul><li>Frühe Maladaptive Schemata (EMS)</li><li>Verlassenheit, Misstrauen, emotionale Entbehrung</li><li>Schemamodi: Kindmodus, Elternmodus, Bewältigungsmodi</li><li>Schematherapie: Limited Reparenting</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> Therapieverfahren</h2>
+          <div class="info-box success">
+            <div class="info-box-title">↑↑ DBT als Erstlinientherapie</div>
+            <p>Dialektisch-Behaviorale Therapie (Linehan) ist das am besten belegte Verfahren bei BPS. Metaanalysen zeigen signifikante Reduktion von Suizidalität, SVV und stationären Aufnahmen (Cristea et al., 2017).</p>
+          </div>
+          <div class="two-col">
+            <div class="card">
+              <div class="card-title">DBT (Linehan, 1993)</div>
+              <ul><li>Fertigkeitentraining: Achtsamkeit, Emotionsregulation, Stresstoleranz, interpers. Effektivität</li><li>Einzeltherapie + Skillsgruppe + Telefoncoaching</li><li>Verhaltensanalysen bei Krisen</li><li>Dialektik: Veränderung & Akzeptanz</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Schematherapie (Young)</div>
+              <ul><li>Schemaidentifikation und -bearbeitung</li><li>Imaginative Überschreibung</li><li>Limited Reparenting</li><li>Modearbeit</li><li>Evidenz: Giesen-Bloo et al. (2006)</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">MBT (Mentalisierungsbasierte Therapie)</div>
+              <ul><li>Bateman & Fonagy (1999, 2004)</li><li>Förderung der Mentalisierungsfähigkeit</li><li>Verständnis eigener & fremder Gefühle</li><li>Ursprünglich für stationären Setting; ambulant adaptiert</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">STEPPS (Systems Training)</div>
+              <ul><li>Gruppenbasiertes Psychoedukationsprogramm</li><li>20 Wochen, Einbeziehung des sozialen Umfelds</li><li>Emotionsregulation & Verhaltensmanagement</li><li>Blum et al. (2008)</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">Linehan, M. M. (1993). Cognitive-Behavioral Treatment of Borderline Personality Disorder. Guilford Press.</div><div class="lit-meta">DBT-Originalwerk <span class="lit-tag">Klassiker</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">Bohus, M. & Wolf-Arehalt, M. (2013). Interaktives Skillstraining für Borderline-Patienten. Schattauer.</div><div class="lit-meta">Deutschsprachiges DBT-Praxisbuch <span class="lit-tag">Praxisbuch</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">3</div><div class="lit-content"><div class="lit-title">Cristea, I. A. et al. (2017). Efficacy of psychotherapies for borderline personality disorder. JAMA Psychiatry, 74(4), 319–328.</div><div class="lit-meta">Metaanalyse zu Therapieeffekten bei BPS <span class="lit-tag">Metaanalyse</span></div><a class="lit-link" href="https://doi.org/10.1001/jamapsychiatry.2016.4287" target="_blank">→ DOI</a></div></div>
+          <div class="lit-item"><div class="lit-num">4</div><div class="lit-content"><div class="lit-title">Young, J. E., Klosko, J. S. & Weishaar, M. E. (2005). Schematherapie. Junfermann.</div><div class="lit-meta">Deutsche Ausgabe des Standardwerks <span class="lit-tag">Standardwerk</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- BIPOLAR PAGE -->
+      <div id="page-bipolar" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F31</span><span class="icd-badge">ICD-11: 6A60–6A61</span>
+          <span class="evidence-badge">S3-Leitlinie verfügbar</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">Bipolare Störungen</h1>
+          <p class="page-subtitle">Bipolar I, Bipolar II, Zyklothymie – Phasenprophylaxe, Psychoedukation, Rückfallprävention</p>
+          <div><span class="tag">Affektive Störung</span><span class="tag">Lithium</span><span class="tag">Psychoedukation</span><span class="tag">Rückfallprävention</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Diagnostik & Verlaufsformen</h2>
+          <table class="criteria-table">
+            <thead><tr><th>Typ</th><th>Episoden</th><th>Kennzeichen</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Bipolar I</strong></td><td>Mind. 1 manische Episode; depressive Ep. häufig</td><td>Manie: Grandiosität, Schlaflosigkeit, Rededrang, Risikobereitschaft ≥ 1 Woche</td></tr>
+              <tr><td><strong>Bipolar II</strong></td><td>Mind. 1 hypomanische + 1 depressive Ep.</td><td>Hypomanie: weniger schwer, keine Psychose, <1 Woche; Depressionen oft im Vordergrund</td></tr>
+              <tr><td><strong>Zyklothymie</strong></td><td>Hypomanie + subdepressive Phasen > 2 Jahre</td><td>Subklinisch, aber deutliche Einschränkung</td></tr>
+              <tr><td><strong>Rapid Cycling</strong></td><td>≥ 4 Episoden/Jahr</td><td>Schlechtere Prognose; oft durch Antidepressiva ausgelöst</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> Psychoedukation & Therapie</h2>
+          <div class="two-col">
+            <div class="card">
+              <div class="card-title">Kernbotschaften Psychoedukation</div>
+              <ul><li>Bipolare Störung = Erkrankung des Gehirns (neurobiologisch), keine Charakterschwäche</li><li>Phasenprophylaxe (Stimmungsstabilisierer) ist lebenswichtig</li><li>Frühwarnzeichen erkennen & Krisenplan</li><li>Regelmäßiger Schlaf-Wach-Rhythmus ist entscheidend</li><li>Substanzmissbrauch erhöht Rückfallrisiko stark</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Psychotherapeutische Bausteine</div>
+              <ul><li>Psychoedukationsgruppen (Colom & Vieta, 2006)</li><li>Interpersonelle & Soziale Rhythmustherapie (IPSRT)</li><li>KVT für bipolare Störungen (Lam et al.)</li><li>Familientherapie / Psychoedukation Angehörige</li><li>Stimmungstagbuch / Selbstmonitoring</li></ul>
+            </div>
+          </div>
+          <div class="guideline-box">
+            <div class="guideline-header"><div><div class="guideline-name">S3-Leitlinie Bipolare Störungen (AWMF 038-019)</div><div class="guideline-org">DGBS / DGPPN · 2019</div></div><span class="tag">S3</span></div>
+            <div class="guideline-body"><p>Empfehlungen zu Akuttherapie (Manie/Depression), Phasenprophylaxe (Lithium als Goldstandard), Psychotherapie als Ergänzung zur Pharmakotherapie.</p><a class="guideline-link" href="https://www.awmf.org/leitlinien/detail/ll/038-019.html" target="_blank">→ AWMF 038-019</a></div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">Colom, F. & Vieta, E. (2006). Psychoeducation Manual for Bipolar Disorder. Cambridge University Press.</div><div class="lit-meta">Gruppenpsychoedukation bipolarer Störungen <span class="lit-tag">Standardwerk</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">Miklowitz, D. J. (2019). The Bipolar Disorder Survival Guide. Guilford (auch deutsch: Ratgeber Bipolare Störung, Hogrefe).</div><div class="lit-meta">Für Klienten geeignet <span class="lit-tag">Patientenliteratur</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- GAD PAGE -->
+      <div id="page-gad" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F41.1</span><span class="icd-badge">ICD-11: 6B00</span>
+          <span class="evidence-badge">S3-Leitlinie</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">Generalisierte Angststörung (GAD)</h1>
+          <p class="page-subtitle">Chronische Sorgen, Metasorgen, kognitive Modelle – Sorgenexposition und Akzeptanzbasierte Ansätze</div>
+          <div><span class="tag">Angststörung</span><span class="tag">KVT</span><span class="tag">Metakognitive Therapie</span><span class="tag">ACT</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Diagnostik & Kernsymptome</h2>
+          <div class="prose"><p><strong>Kernsymptom:</strong> Exzessive, unkontrollierbare Besorgnis über mehrere Bereiche (Gesundheit, Beruf, Familie, Finanzen) an mehr als der Hälfte der Tage über mind. 6 Monate. Begleitsymptome: Ruhelosigkeit, rasche Ermüdbarkeit, Konzentrationsprobleme, Reizbarkeit, Muskelspannung, Schlafstörungen (mind. 3).</p><p><strong>Differenzialdiagnosen:</strong> Depression (Grübeln primär negativ-rückblickend), Soziale Phobie (Sorgen über soziale Situation), Hypochondrie (ausschließlich Gesundheitssorgen), OCD (Obsessionen, Zwangshandlungen).</p></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🧬</span> Kognitive Modelle</h2>
+          <div class="two-col">
+            <div class="card">
+              <div class="card-title">Metakognitives Modell (Wells, 1999)</div>
+              <ul><li>Positive Metakognition: "Sorgen schützen mich"</li><li>Negative Metakognition: "Sorgen sind unkontrollierbar & gefährlich"</li><li>Typ-1 Sorgen → Typ-2 Sorgen (Metasorgen)</li><li>Therapieziel: Metakognitive Überzeugungen verändern</li></ul>
+            </div>
+            <div class="card">
+              <div class="card-title">Intoleranz gegenüber Ungewissheit (Dugas)</div>
+              <ul><li>Hohe IU = Sorgen als Bewältigungsstrategie</li><li>Gedankliche Lösung von Problemen als Kontrolle</li><li>Sorgenexposition: unsichere Situationen aushalten</li><li>Problemlösen vs. Sich-Sorgen unterscheiden</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> Interventionen</h2>
+          <div class="two-col">
+            <div class="card"><div class="card-title">Sorgenexposition</div><ul><li>Schlimmstes Szenario imaginieren (Ohman)</li><li>Angsthabituierung durch Konfrontation</li><li>Keine vorzeitige Beruhigung</li></ul></div>
+            <div class="card"><div class="card-title">Metakognitive Therapie (MCT)</div><ul><li>Aufmerksamkeitsrefokussierung (ATT)</li><li>Detached Mindfulness</li><li>Positive/negative Metakognition revidieren</li></ul></div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">Wells, A. (2011). Metakognitive Therapie bei Angststörungen und Depression. Beltz.</div><div class="lit-meta">Standardwerk MCT <span class="lit-tag">Standardwerk</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">Dugas, M. J. & Robichaud, M. (2007). Cognitive-Behavioral Treatment for Generalized Anxiety Disorder. Routledge.</div><div class="lit-meta"><span class="lit-tag">Therapiemanual</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- SOZIALE ANGST PAGE -->
+      <div id="page-soziale-angst" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F40.1</span><span class="evidence-badge">S3-Leitlinie</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">Soziale Angststörung</h1>
+          <p class="page-subtitle">Soziale Phobie – Kognitives Modell, Selbstaufmerksamkeit, Exposition</p>
+          <div><span class="tag">Angststörung</span><span class="tag">KVT</span><span class="tag">Exposition</span><span class="tag">Clark & Wells</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🧬</span> Kognitives Modell (Clark & Wells, 1995)</h2>
+          <div class="card" style="background:var(--color-surface-2);">
+            <ul><li><strong>Auslöser:</strong> Soziale Situation</li><li><strong>→ Wahrgenommene Gefahr:</strong> Neg. Beurteilung durch andere ("Ich werde mich blamieren")</li><li><strong>→ Selbstfokussierte Aufmerksamkeit:</strong> Überwachung eigener Körpersignale</li><li><strong>→ Sicherheitsverhalten:</strong> Blickkontakt vermeiden, wenig sprechen</li><li><strong>→ Verarbeitung nach Situation:</strong> Post-event Processing (negative Nachbewertung)</li><li><strong>→ Teufelskreis:</strong> Sicherheitsverhalten verhindert korrigierende Erfahrungen</li></ul>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> Therapiefokus</h2>
+          <div class="two-col">
+            <div class="card"><div class="card-title">Aufmerksamkeitsfokus verschieben</div><ul><li>Externe statt interne Aufmerksamkeit üben</li><li>Videofeedback: Selbstwahrnehmung korrigieren</li><li>Sicherheitsverhalten aufgeben</li></ul></div>
+            <div class="card"><div class="card-title">Exposition ohne Sicherheitsverhalten</div><ul><li>Verhaltensexperimente in sozialen Situationen</li><li>Rollenspiele in Sitzung</li><li>Post-event Processing bearbeiten</li></ul></div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">Clark, D. M. & Wells, A. (1995). A cognitive model of social phobia. In R. G. Heimberg et al. (Eds.), Social Phobia. Guilford.</div><div class="lit-meta"><span class="lit-tag">Klassiker</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">Stangier, U., Clark, D. M. & Ehlers, A. (2016). Soziale Phobie – Fortschritte der Psychotherapie. Hogrefe.</div><div class="lit-meta"><span class="lit-tag">Praxisbuch</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- SPEZIFISCHE PHOBIE -->
+      <div id="page-spezifische-phobie" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F40.2</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">Spezifische Phobien</h1>
+          <p class="page-subtitle">Tier-, Blut-Injektion-Verletzungs-, situative und andere Phobien</p>
+          <div><span class="tag">Angststörung</span><span class="tag">Exposition</span><span class="tag">Reizüberflutung</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Diagnostik & Typen</h2>
+          <div class="two-col">
+            <div class="card"><div class="card-title">Typen nach DSM-5 / ICD-10</div><ul><li>Tiertyp (Spinnen, Hunde, Insekten)</li><li>Umgebungstyp (Höhe, Dunkelheit, Wasser)</li><li>Blut-Injektion-Verletzungstyp (Vasovagale Reaktion!)</li><li>Situationstyp (Fahrstuhl, Tunnels, Fliegen)</li><li>Andere (Erbrechen, Ersticken)</li></ul></div>
+            <div class="card"><div class="card-title">Diagnostische Kriterien</div><ul><li>Ausgeprägte Angst/Phobie bei spezif. Objekt/Situation</li><li>Angst sofort, unverhältnismäßig, persistent (≥6 Mon.)</li><li>Vermeidungsverhalten oder Angst ertragen</li><li>Klinisch bedeutsame Beeinträchtigung</li></ul></div>
+          </div>
+          <div class="info-box warn"><div class="info-box-title">⚠️ Sonderfall BIV-Phobie</div><p>Blut-Injektion-Verletzungs-Phobie: Biphasische Reaktion – Erst Anstieg, dann starker Abfall von Herzfrequenz und Blutdruck (vasovagale Reaktion → Ohnmacht). Standardexposition kann kontraindiziert sein. Applied Tension (Öst, 1989) als Methode der Wahl.</p></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> Therapie</h2>
+          <div class="card"><div class="card-title">Exposition in vivo (Intensivexposition)</div><ul><li>Eine Sitzung (1–3h) oft ausreichend (Öst, 1989; RCT)</li><li>Massierte Exposition ohne Vermeidung</li><li>Habituation vs. Inhibitionslernen-Modell (Craske)</li><li>Erwartungskorrektur als Wirkmechanismus</li></ul></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">Öst, L.-G. (1989). One-session treatment for specific phobias. Behaviour Research and Therapy, 27(1), 1–7.</div><div class="lit-meta"><span class="lit-tag">Klassiker</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">Craske, M. G. et al. (2014). Maximizing exposure therapy: An inhibitory learning approach. Behaviour Research and Therapy, 58, 10–23.</div><div class="lit-meta">Inhibitorisches Lernmodell <span class="lit-tag">Theoretisch</span></div><a class="lit-link" href="https://doi.org/10.1016/j.brat.2014.04.006" target="_blank">→ DOI</a></div></div>
+        </div>
+      </div>
+
+      <!-- ZWANG PAGE -->
+      <div id="page-zwang" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F42</span><span class="icd-badge">ICD-11: 6B20</span>
+          <span class="evidence-badge">S3-Leitlinie</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">Zwangsstörung (OCD)</h1>
+          <p class="page-subtitle">Zwangsgedanken und Zwangshandlungen – Expositions- und Reaktionsverhinderung (ERP), kognitive Modelle</p>
+          <div><span class="tag">Zwangsspektrumsstörung</span><span class="tag">ERP</span><span class="tag">KVT</span><span class="tag">Obsessionen</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Diagnostik</h2>
+          <div class="two-col">
+            <div class="card"><div class="card-title">Zwangsgedanken (Obsessionen)</div><ul><li>Intrusive, unwillkürliche, wiederkehrende Gedanken, Impulse oder Bilder</li><li>Als ich-dyston erlebt (fremd, ungewollt)</li><li>Verursachen ausgeprägte Angst/Unbehagen</li><li>Unterdrückung führt zu Verstärkung (Rebound)</li></ul></div>
+            <div class="card"><div class="card-title">Zwangshandlungen (Kompulsionen)</div><ul><li>Repetitive Verhaltensweisen oder mentale Akte</li><li>Zur Reduktion von Angst/Unbehagen</li><li>Kurze Angstreduktion → Verstärkung der Zwänge</li><li>Typisch: Waschen, Kontrollieren, Ordnen, Zählen, Wiederholen</li></ul></div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🧬</span> Kognitive Modelle</h2>
+          <div class="two-col">
+            <div class="card"><div class="card-title">Salkovskis (1985): Kognitive Theorie</div><ul><li>Intrusionen sind normal (ca. 90% der Menschen)</li><li>Overresponsibility-Bias: "Wenn ich daran denke, bin ich verantwortlich"</li><li>Neutralisierung (Zwangshandlung) verhindert Extinction</li></ul></div>
+            <div class="card"><div class="card-title">Verhaltensanalyse</div><ul><li>Auslöser → Obsession → Angst → Neutralisierung → kurzfristige Erleichterung</li><li>Operante Konditionierung (neg. Verstärkung)</li><li>Reaktionsverhinderung unterbricht diesen Kreislauf</li></ul></div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> Expositions- und Reaktionsverhinderung (ERP)</h2>
+          <div class="info-box success"><div class="info-box-title">↑↑ ERP als Erstlinientherapie</div><p>ERP ist das wirksamste psychotherapeutische Verfahren bei OCD. Etwa 60–80% sprechen an. Kombination mit SSRI bei schwerer Ausprägung sinnvoll (NVL Angst; S3 Zwangsstörungen).</p></div>
+          <div class="card"><div class="card-title">Durchführung ERP</div><ul><li>Angst-/Vermeidungshierarchie erstellen (SUDs 0–100)</li><li>Exposition mit dem Auslöser ohne Neutralisierung</li><li>Ritualverhinderung während und nach Exposition</li><li>Keine Beruhigung durch Therapeutin geben</li><li>Habituation (klassisch) oder Inhibitorisches Lernen (Craske)</li><li>Imaginale Exposition bei primären Obsessionen (keine Handlung)</li></ul></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">Foa, E. B. & Kozak, M. J. (1986). Emotional processing of fear. Psychological Bulletin, 99(1), 20–35.</div><div class="lit-meta">Habituation bei ERP <span class="lit-tag">Klassiker</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">Salkovskis, P. M. (1985). Obsessional-compulsive problems: A cognitive-behavioural analysis. Behaviour Research and Therapy, 23(5), 571–583.</div><div class="lit-meta"><span class="lit-tag">Klassiker</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">3</div><div class="lit-content"><div class="lit-title">Külz, A. K. & Voderholzer, U. (2012). Zwangsstörungen verstehen und behandeln. Beltz.</div><div class="lit-meta">Deutschsprachig <span class="lit-tag">Praxisbuch</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- SCHIZOPHRENIE -->
+      <div id="page-schizophrenie" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F20</span><span class="icd-badge">ICD-11: 6A20</span>
+          <span class="evidence-badge">S3-Leitlinie</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">Schizophrenie</h1>
+          <p class="page-subtitle">Psychotische Erkrankungen, Vulnerabilitäts-Stress-Modell, Psychoedukation, KVT bei Psychose</p>
+          <div><span class="tag">Psychose</span><span class="tag">Antipsychotika</span><span class="tag">KVTp</span><span class="tag">Psychoedukation</span><span class="tag">Rehabilitation</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Diagnostik</h2>
+          <div class="two-col">
+            <div class="card"><div class="card-title">Positivsymptome</div><ul><li>Wahnideen (Verfolgungswahn, Beziehungswahn)</li><li>Halluzinationen (häufig akustisch: Stimmen)</li><li>Desorganisiertes Denken / Sprechen</li><li>Grob desorganisiertes Verhalten</li></ul></div>
+            <div class="card"><div class="card-title">Negativsymptome</div><ul><li>Affektverflachung / Gefühlsverarmung</li><li>Alogie (Sprachverarmung)</li><li>Avolition (Antriebslosigkeit)</li><li>Anhedonie</li><li>Soziale Isolation</li></ul></div>
+          </div>
+          <div class="info-box info"><div class="info-box-title">ℹ️ Diagnostische Anforderungen ICD-10 (F20)</div><p>Mind. 1 der Erstrang-Symptome (Schneider) oder 2+ der Zweitrang-Symptome über mind. 1 Monat. Organische Ursachen und Substanzmissbrauch ausgeschlossen. Differenzialdiagnose: Schizoaffektiv (F25), organisch bedingte Psychosen, Drogenpsychose.</p></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🧬</span> Vulnerabilitäts-Stress-Modell (Zubin & Spring, 1977)</h2>
+          <div class="card" style="background:var(--color-surface-2);"><p style="font-size:var(--text-sm);margin-bottom:0.75rem;">Das Kernmodell der Psychoedukation bei Schizophrenie:</p><ul style="font-size:var(--text-sm);padding-left:1.5rem;"><li><strong>Biologische Vulnerabilität</strong> (Genetik, neurobiologische Entwicklung) + <strong>Stressoren</strong> (Life Events, Substanzen, sozialer Stress) = Psychose</li><li>Schutzfaktoren: Medikamente, soziale Unterstützung, Stressreduktion, Frühwarnsignale kennen</li><li>Modell ermöglicht entstigmatisierendes Verständnis</li></ul></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> Therapeutische Interventionen</h2>
+          <div class="two-col">
+            <div class="card"><div class="card-title">KVT bei Psychosen (KVTp)</div><ul><li>Gedanken über Stimmen hinterfragen</li><li>Wahnüberzeugungen explorieren (nicht konfrontieren)</li><li>Normalized Explanation: Stimmen als stressbedingt verstehen</li><li>Tarrier et al. (2004); Empfehlungsgrad B</li></ul></div>
+            <div class="card"><div class="card-title">Gruppenpsychoedukation</div><ul><li>PEGASUS (Bäuml et al.) – manualbasiertes Programm</li><li>ELAN – Angehörigenpsychoedukation</li><li>Frühwarnsignale erkennen & Krisenplan</li><li>Medikamentencompliance fördern</li></ul></div>
+          </div>
+          <div class="guideline-box">
+            <div class="guideline-header"><div><div class="guideline-name">S3-Leitlinie Schizophrenie (AWMF 038-009)</div><div class="guideline-org">DGPPN · 2019</div></div><span class="tag">S3</span></div>
+            <div class="guideline-body"><p>Empfehlungen zu Akut- und Langzeitbehandlung; Antipsychotika als Erstlinientherapie; KVT ergänzend; soziale Rehabilitation; Angehörigeneinbezug.</p><a class="guideline-link" href="https://www.awmf.org/leitlinien/detail/ll/038-009.html" target="_blank">→ AWMF 038-009</a></div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">Bäuml, J. et al. (2006). Psychoedukation bei schizophrenen Erkrankungen. Schattauer.</div><div class="lit-meta">PEGASUS-Programm <span class="lit-tag">Standardwerk</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">Kingdon, D. & Turkington, D. (2005). Cognitive Therapy of Schizophrenia. Guilford Press.</div><div class="lit-meta">KVT bei Psychose <span class="lit-tag">Standardwerk</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- ALKOHOL PAGE -->
+      <div id="page-alkohol" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F10</span><span class="evidence-badge">S3-Leitlinie</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">Alkoholstörung</h1>
+          <p class="page-subtitle">Alkoholabhängigkeit, schädlicher Gebrauch – Motivationale Gesprächsführung, Rückfallprävention</p>
+          <div><span class="tag">Sucht</span><span class="tag">MI</span><span class="tag">Rückfallprävention</span><span class="tag">KVT</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Diagnostik</h2>
+          <div class="two-col">
+            <div class="card"><div class="card-title">Abhängigkeitssyndrom (F10.2) – ICD-10</div><ul><li>Starkes Verlangen / Craving</li><li>Eingeschränkte Kontrolle</li><li>Körperliches Entzugssyndrom</li><li>Toleranzentwicklung</li><li>Vernachlässigung anderer Interessen</li><li>Fortsetzen trotz schädlicher Folgen</li><li>→ mind. 3 von 6, letztes Jahr</li></ul></div>
+            <div class="card"><div class="card-title">Screening-Instrumente</div><ul><li><strong>AUDIT</strong>: Alkohol Use Disorders Identification Test (WHO)</li><li><strong>CAGE</strong>: 4-Item-Screening (Cut down, Annoyed, Guilty, Eye-opener)</li><li><strong>FAST</strong>: Fast Alcohol Screening Test</li><li>Labortests: GGT, MCV, CDT</li></ul></div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> Therapieansätze</h2>
+          <div class="two-col">
+            <div class="card"><div class="card-title">Motivationale Gesprächsführung (MI)</div><ul><li>Miller & Rollnick (2013)</li><li>OARS: Open Questions, Affirm, Reflect, Summarize</li><li>Ambivalenz explorieren, nicht bekämpfen</li><li>Change Talk fördern</li><li>Stadienmodell: Prochaska & DiClemente</li></ul></div>
+            <div class="card"><div class="card-title">Rückfallprävention (Marlatt)</div><ul><li>Hochrisikosituationen identifizieren</li><li>Bewältigungsstrategien entwickeln</li><li>Urge-Surfing (Achtsamkeit auf Craving)</li><li>Abstinenz vs. kontrolliertes Trinken</li><li>Notfallplan / Krisenplan</li></ul></div>
+          </div>
+          <div class="guideline-box">
+            <div class="guideline-header"><div><div class="guideline-name">S3-Leitlinie Alkoholbezogene Störungen (AWMF 076-001)</div><div class="guideline-org">DGPPN / DG-Sucht · 2021</div></div><span class="tag">S3</span></div>
+            <div class="guideline-body"><p>Empfehlungen zu Screening, Kurzintervention, Entzugsbehandlung, Rückfallprävention, Pharmakotherapie (Acamprosat, Naltrexon) und psychosozialer Beratung.</p><a class="guideline-link" href="https://www.awmf.org/leitlinien/detail/ll/076-001.html" target="_blank">→ AWMF 076-001</a></div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">Miller, W. R. & Rollnick, S. (2015). Motivierende Gesprächsführung. Lambertus.</div><div class="lit-meta">MI-Standardwerk (deutsch) <span class="lit-tag">Standardwerk</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">Körkel, J. & Kruse, G. (2013). Mit dem Rückfall leben: Abstinenz als Weg & Ziel. Balance.</div><div class="lit-meta">Rückfallprävention (deutsch) <span class="lit-tag">Praxisbuch</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- ESSSTÖRUNGEN -->
+      <div id="page-essstoerungen" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F50</span><span class="evidence-badge">S3-Leitlinie</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">Essstörungen</h1>
+          <p class="page-subtitle">Anorexia nervosa, Bulimia nervosa, Binge-Eating-Störung – Körperbild, Kognitive Modelle, DBT</p>
+          <div><span class="tag">Essstörung</span><span class="tag">KVT</span><span class="tag">DBT</span><span class="tag">Körperbild</span><span class="tag">Maudsley</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Diagnostik & Differenzierung</h2>
+          <table class="criteria-table">
+            <thead><tr><th>Diagnose</th><th>Kernsymptome</th><th>ICD-10</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Anorexia nervosa</strong></td><td>BMI <17,5; Körperschemastörung; restriktives Essverhalten; Amenorrhö; Gewichtsphobie</td><td>F50.0</td></tr>
+              <tr><td><strong>Bulimia nervosa</strong></td><td>Essanfälle + Kompensation (Erbrechen, Laxantien); Gewicht oft normal; neg. Körperbild</td><td>F50.2</td></tr>
+              <tr><td><strong>Binge-Eating-Störung (BES)</strong></td><td>Essanfälle ohne Kompensation; Kontrollverlust; Schuldgefühle</td><td>F50.3 / DSM-5</td></tr>
+              <tr><td><strong>ARFID</strong></td><td>Vermeidung best. Lebensmittel (Texture, Farbe); kein Körperbild-Thema; DSM-5</td><td>–</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> Evidenzbasierte Therapie</h2>
+          <div class="two-col">
+            <div class="card"><div class="card-title">KVT-E (Fairburn, CBT-E)</div><ul><li>Transdiagnostischer Ansatz für AN, BN, BES</li><li>Normalisierung des Essverhaltens</li><li>Körperschemastörung bearbeiten</li><li>Überwertige Ideen zur Figur</li><li>Rückfallprävention</li></ul></div>
+            <div class="card"><div class="card-title">DBT für Essstörungen</div><ul><li>Besonders bei BES + Affektregulationsschwierigkeiten</li><li>Skillstraining Emotionsregulation</li><li>Achtsamkeit zum Essverhalten</li><li>Körperakzeptanz</li></ul></div>
+            <div class="card"><div class="card-title">Familientherapie (Maudsley-Ansatz)</div><ul><li>Besonders bei adoleszenter AN</li><li>Eltern übernehmen Kontrolle über Essen (Phase 1)</li><li>Schrittweise Rückgabe an Jugendliche (Phase 2)</li><li>Gut belegt; Lock et al. (2010)</li></ul></div>
+            <div class="card"><div class="card-title">Psychoedukations-Kernbotschaften</div><ul><li>Essstörungen sind psychische Erkrankungen, keine Diäten</li><li>Biologische Regulation des Körpergewichts (Set-Point)</li><li>Teufelskreis: Restriktion → Essanfälle → Kompensation</li><li>Körperakzeptanz als Therapieziel</li></ul></div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">Fairburn, C. G. (2008). Cognitive Behavior Therapy and Eating Disorders. Guilford Press.</div><div class="lit-meta">CBT-E Standardwerk <span class="lit-tag">Standardwerk</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">S3-Leitlinie Essstörungen (AWMF 051-026). DGPPN, 2019.</div><div class="lit-meta"><span class="lit-tag">S3-Leitlinie</span></div><a class="lit-link" href="https://www.awmf.org/leitlinien/detail/ll/051-026.html" target="_blank">→ AWMF 051-026</a></div></div>
+          <div class="lit-item"><div class="lit-num">3</div><div class="lit-content"><div class="lit-title">Jacobi, C. & Schneider, S. (2020). Essstörungen – Hogrefe-Praxisreihe.</div><div class="lit-meta">Deutschsprachig <span class="lit-tag">Praxisbuch</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- ADHS PAGE -->
+      <div id="page-adhs" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F90</span><span class="icd-badge">ICD-11: 6A05</span>
+          <span class="evidence-badge">S3-Leitlinie</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">ADHS im Erwachsenenalter</h1>
+          <p class="page-subtitle">Aufmerksamkeitsdefizit-Hyperaktivitätsstörung – Diagnostik, neurobiologische Grundlagen, KVT, Coaching</p>
+          <div><span class="tag">Neurodiversität</span><span class="tag">ADHS</span><span class="tag">KVT</span><span class="tag">Methylphenidat</span><span class="tag">Coaching</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Diagnostik Erwachsene</h2>
+          <div class="info-box info"><div class="info-box-title">ℹ️ Besonderheiten bei Erwachsenen</div><p>ADHS im Erwachsenenalter ist oft anders als im Kindesalter: Hyperaktivität wird zu innerer Unruhe; Impulsivität zeigt sich in Beziehungen und Entscheidungen; Unaufmerksamkeit dominiert häufig. Komorbiditäten (Depression, Angst, Substanzstörungen) können das Bild verschleiern. Diagnostik erfordert retrospektive Erfassung (Kindheit).</p></div>
+          <div class="two-col">
+            <div class="card"><div class="card-title">Diagnostische Kriterien (DSM-5)</div><ul><li>Unaufmerksamkeit: ≥5 Symptome (Erwachsene), >6 Monate</li><li>Hyperaktivität/Impulsivität: ≥5 Symptome (Erwachsene)</li><li>Beginn vor dem 12. Lebensjahr</li><li>Beeinträchtigung in ≥2 Settings</li><li>Nicht besser durch andere Störung erklärt</li></ul></div>
+            <div class="card"><div class="card-title">Screening & Diagnostik</div><ul><li><strong>WURS-k</strong>: Wender-Utah-Rating-Scale (retrospektiv Kindheit)</li><li><strong>CAARS</strong>: Conners Adult ADHD Rating Scales</li><li><strong>ADHS-SB</strong>: ADHS-Selbstbeurteilungsskala (deutsch)</li><li>Neuropsychologische Testung (CPT, d2-R)</li><li>Differenzialdiagnose: Depression, Angst, Bipolar, Schlaf</li></ul></div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🧬</span> Neurobiologische Grundlagen – Psychoedukation</h2>
+          <div class="card" style="background:var(--color-surface-2);"><ul><li>Dopaminerge und noradrenerge Dysfunktion im präfrontalen Kortex</li><li>Executive Function-Defizite: Arbeitsgedächtnis, Inhibition, Planung</li><li>ADHS ist hochgradig erblich (Heritabilität ~75%)</li><li>Kein "Willensproblem" – neurobiologische Regulation erschwert</li><li>Medikamente (Methylphenidat, Amphetamine) normalisieren Dopaminsignale</li><li>ADHS im Erwachsenenalter: lebenslange Störung, aber gut kompensierbar</li></ul></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> Therapie</h2>
+          <div class="two-col">
+            <div class="card"><div class="card-title">KVT für ADHS (Safren et al.)</div><ul><li>Organisationsstrategien und Zeitmanagement</li><li>Prokrastination und Planungsdefizite</li><li>Kognitive Umstrukturierung (neg. Selbstbewertung)</li><li>Impulskontrollstrategien</li><li>Safren et al. (2010) – RCT belegt</li></ul></div>
+            <div class="card"><div class="card-title">ADHS-Coaching</div><ul><li>Strukturierungshilfen im Alltag</li><li>Ziele und Prioritäten setzen</li><li>Selbstmanagement-Strategien</li><li>Komplementär zur Psychotherapie</li><li>Evidenz wächst; DSGB empfohlen</li></ul></div>
+          </div>
+          <div class="guideline-box">
+            <div class="guideline-header"><div><div class="guideline-name">S3-Leitlinie ADHS bei Kindern, Jugendlichen und Erwachsenen (AWMF 028-045)</div><div class="guideline-org">DGKJP / DGPPN · 2018</div></div><span class="tag">S3</span></div>
+            <div class="guideline-body"><p>Multimodales Behandlungskonzept: Pharmakotherapie (Methylphenidat, Amphetamine, Atomoxetin) + Psychotherapie + Coaching. Psychoedukation als Grundbaustein.</p><a class="guideline-link" href="https://www.awmf.org/leitlinien/detail/ll/028-045.html" target="_blank">→ AWMF 028-045</a></div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">Safren, S. A. et al. (2010). Cognitive-Behavioral Therapy for ADHD in Adults. Guilford Press.</div><div class="lit-meta">KVT ADHS Erwachsene – RCT-belegt <span class="lit-tag">Standardwerk</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">Rösler, M. & Retz, W. (2018). ADHS bei Erwachsenen – Diagnostik und Therapie. Kohlhammer.</div><div class="lit-meta">Deutschsprachiges Praxisbuch <span class="lit-tag">Praxisbuch</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- SCHLAF -->
+      <div id="page-schlaf" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F51.0</span><span class="evidence-badge">S3-Leitlinie</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">Insomnien & Schlafstörungen</h1>
+          <p class="page-subtitle">Chronische Insomnie, CBT-I – das wirksamste Verfahren bei Schlafstörungen</p>
+          <div><span class="tag">Schlafstörung</span><span class="tag">CBT-I</span><span class="tag">Schlafhygiene</span><span class="tag">Stimuluskontrolle</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Diagnostik</h2>
+          <div class="prose"><p>Chronische Insomnie: Ein-/Durchschlafprobleme oder frühmorgendliches Erwachen, mind. 3 Nächte/Woche, mind. 3 Monate, trotz ausreichender Gelegenheit, mit tagsüber Beeinträchtigung (Konzentration, Stimmung, Leistung). Nicht besser durch andere Schlafstörung erklärt.</p></div>
+          <div class="two-col">
+            <div class="card"><div class="card-title">3P-Modell (Spielman, 1987)</div><ul><li><strong>Prädisponierende Faktoren:</strong> Hyperarousal-Tendenz, Angst</li><li><strong>Präzipitierende Faktoren:</strong> Auslösendes Ereignis (Stress, Krankheit)</li><li><strong>Perpetuierende Faktoren:</strong> Schlechte Schlafhygiene, Bett-Wach-Assoziation, Katastrophisieren</li></ul></div>
+            <div class="card"><div class="card-title">Diagnostik</div><ul><li>Schlaftagebuch (2 Wochen): SE%, SOL, WASO</li><li>PSQI (Pittsburgh Sleep Quality Index)</li><li>ISI (Insomnia Severity Index)</li><li>Actigraphie bei Bedarf</li><li>Polysomnographie bei Verdacht auf OSA, RLS, Parasomnie</li></ul></div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> CBT-I (Kognitive Verhaltenstherapie für Insomnie)</h2>
+          <div class="info-box success"><div class="info-box-title">↑↑ CBT-I – Erstlinientherapie, Pharmakotherapie überlegen</div><p>CBT-I ist wirksamer als Hypnotika auf lange Sicht (Riemann et al., 2017; AAC-Guideline). 75–80% der Betroffenen profitieren; Verbesserung hält nach Therapieende an (Pharmaka nicht).</p></div>
+          <div class="two-col">
+            <div class="card"><div class="card-title">Stimuluskontrolle (Bootzin)</div><ul><li>Bett nur für Schlafen (+ Sex) nutzen</li><li>Bei Wachliegen (>20 min) aufstehen</li><li>Feste Aufstehzeit, kein Ausschlafen</li><li>Stärkste Einzelintervention der CBT-I</li></ul></div>
+            <div class="card"><div class="card-title">Schlafrestriktion</div><ul><li>Schlaffenster auf tatsächliche Schlafzeit begrenzen</li><li>Schrittweise Ausweitung bei SE >85%</li><li>Intensiviert Schlafdruck</li><li>Gut belegt; anfangs schwierig</li></ul></div>
+            <div class="card"><div class="card-title">Kognitive Umstrukturierung</div><ul><li>"Ich muss 8 Stunden schlafen" → hinterfragen</li><li>Katastrophisierende Gedanken über Schlaf</li><li>Paradoxe Intention (nicht einschlafen wollen)</li><li>Schlafbezogene Sicherheitsverhalten aufgeben</li></ul></div>
+            <div class="card"><div class="card-title">Schlafhygiene & Entspannung</div><ul><li>Regelmäßige Schlafzeiten</li><li>Kühles, dunkles Schlafzimmer</li><li>Kein Koffein nach 14 Uhr</li><li>Progressive Muskelrelaxation (PMR)</li><li>Mindfulness-basierte Schlafinterventionen</li></ul></div>
+          </div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">Riemann, D. et al. (2017). European guideline for the diagnosis and treatment of insomnia. Journal of Sleep Research, 26(6), 675–700.</div><div class="lit-meta">Europäische Leitlinie <span class="lit-tag">Leitlinie</span></div><a class="lit-link" href="https://doi.org/10.1111/jsr.12594" target="_blank">→ DOI</a></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">Espie, C. A. (2006). Overcoming Insomnia and Sleep Problems. Robinson (dt.: Hogrefe).</div><div class="lit-meta">Auch für Patientinnen geeignet <span class="lit-tag">Patientenliteratur</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- DYSTHYMIE -->
+      <div id="page-dysthymie" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F34.1</span><span class="icd-badge">ICD-11: 6A72</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">Dysthymie / Persistierende Depressive Störung</h1>
+          <p class="page-subtitle">Chronisch-depressive Verstimmung – Kein "Tief genug" für Major Depression, aber nachhaltige Beeinträchtigung</p>
+          <div><span class="tag">Affektive Störung</span><span class="tag">KVT</span><span class="tag">CBASP</span><span class="tag">Chronische Depression</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Diagnostik</h2>
+          <div class="prose"><p><strong>Dysthymie (ICD-10):</strong> Gedrückte Stimmung über mind. 2 Jahre (bei Erwachsenen), an mehr Tagen als nicht, mit mind. 2 Zusatzsymptomen. Keine Episoden schwerer Depression in den ersten 2 Jahren. "Double Depression": Dysthymie + Episoden von Major Depression.</p></div>
+          <div class="info-box info"><div class="info-box-title">ℹ️ Besonderheiten</div><p>Patienten mit Dysthymie berichten oft, "schon immer so gewesen" zu sein. Geringes Behandlungswissen ("Das ist halt mein Charakter"). Wichtig: Entstigmatisierung und Aufklärung, dass Dysthymie behandelbar ist. Oft jahrelange Unterversorgung.</p></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> CBASP – Therapie der Wahl bei chronischer Depression</h2>
+          <div class="card"><div class="card-title">Cognitive Behavioral Analysis System of Psychotherapy (McCullough, 2000)</div><ul><li>Spezifisch für chronische Depression entwickelt</li><li>Situationsanalyse (SA): Was wollte ich? Was passierte wirklich? Warum der Unterschied?</li><li>Interpersonelle Diskrimination: Vergangenheit ≠ Gegenwart</li><li>Kontingentes persönliches Reagieren (CPR)</li><li>Überlegenheit gegenüber Standard-KVT bei chronischer Depression (Keller et al., 2000; NEJM)</li></ul></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">McCullough, J. P. (2003). Behandlung von Depressionen mit dem CBASP. Pfeiffer/Klett-Cotta.</div><div class="lit-meta">CBASP Standardwerk (deutsch) <span class="lit-tag">Standardwerk</span></div></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">Keller, M. B. et al. (2000). A comparison of nefazodone, the cognitive behavioral-analysis system of psychotherapy, and their combination for the treatment of chronic depression. NEJM, 342(20), 1462–1470.</div><div class="lit-meta">Landmark-Studie CBASP <span class="lit-tag">RCT</span></div><a class="lit-link" href="https://doi.org/10.1056/NEJM200005183422001" target="_blank">→ DOI</a></div></div>
+        </div>
+      </div>
+
+      <!-- AKUTE BELASTUNG -->
+      <div id="page-akute-belastung" class="hidden">
+        <div class="page-header">
+          <span class="icd-badge">ICD-10: F43.0</span>
+          <h1 class="page-title" style="margin-top:0.75rem;">Akute Belastungsreaktion & Anpassungsstörung</h1>
+          <p class="page-subtitle">Reaktion auf schwerwiegende Belastung – Krisenintervention, Stabilisierung, Psychoedukation</p>
+          <div><span class="tag">Belastungsstörung</span><span class="tag">Krisenintervention</span><span class="tag">Stabilisierung</span></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🔍</span> Diagnostik</h2>
+          <div class="two-col"><div class="card"><div class="card-title">Akute Belastungsreaktion (F43.0)</div><ul><li>Unmittelbar nach außerordentlicher Belastung</li><li>Stunden bis max. 3 Tage</li><li>Taubheit, Desorientierung, Dissoziation</li><li>Normalisierung, Stabilisierung, praktische Unterstützung</li></ul></div><div class="card"><div class="card-title">Anpassungsstörung (F43.2)</div><ul><li>Nach identifizierbarem Stressor (1 Monat)</li><li>Symptome dauern max. 6 Monate</li><li>Depressive Stimmung, Angst, Verhaltensauffälligkeiten</li><li>Therapie: Problemlösen, Stressmanagement, Trauerarbeit</li></ul></div></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">🛠️</span> Krisenintervention & Stabilisierung</h2>
+          <div class="info-box info"><div class="info-box-title">ℹ️ Psychologische Erste Hilfe (PEH)</div><p>WHO-Empfehlung nach Traumaereignis: <strong>Beobachten</strong> (Sicherheit, Grundbedürfnisse), <strong>Ansprechen</strong> (freundlich, nicht aufdrängen), <strong>Zuhören</strong> (aktiv, ohne Drängen zu erzählen), <strong>Verbinden</strong> (mit sozialer Unterstützung, Diensten), <strong>Schützen</strong> (vor weiterer Exposition). Kein forciertes Debriefing (Mitchell) – kontraproduktiv.</p></div>
+          <div class="card"><div class="card-title">Stabilisierungstechniken</div><ul><li>Sicherer Ort / Safe Place (Imagination)</li><li>Erdungsübungen (5-4-3-2-1, Grounding)</li><li>Atemübungen (4-7-8, Box Breathing)</li><li>Containment (Tresor-Übung)</li><li>Ressourcenaktivierung</li></ul></div>
+        </div>
+        <div class="section">
+          <h2 class="section-title"><span class="section-title-icon">📚</span> Literatur</h2>
+          <div class="lit-item"><div class="lit-num">1</div><div class="lit-content"><div class="lit-title">WHO (2011). Psychological First Aid: Guide for Field Workers. WHO Press.</div><div class="lit-meta">Psychologische Erste Hilfe <span class="lit-tag">Leitlinie</span></div><a class="lit-link" href="https://www.who.int/publications/i/item/9789241548205" target="_blank">→ WHO</a></div></div>
+          <div class="lit-item"><div class="lit-num">2</div><div class="lit-content"><div class="lit-title">Reddemann, L. (2001). Imagination als heilsame Kraft. Pfeiffer/Klett-Cotta.</div><div class="lit-meta">Stabilisierungsübungen <span class="lit-tag">Praxisbuch</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- NARZISSTISCH, IES, PSYCHOSE, SUBSTANZEN, SOMATISCH, AUTISMUS, SCHMERZ stubs -->
+      <div id

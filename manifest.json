@@ -1,0 +1,54 @@
+{
+  "name": "PsychoEdukation · Klinische Bibliothek",
+  "short_name": "PsychoEdukation",
+  "description": "Evidenzbasierte Psychoedukations-Bibliothek für Psychotherapeutinnen in der ambulanten Erwachsenentherapie",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8faf6",
+  "theme_color": "#2d6a4f",
+  "orientation": "any",
+  "lang": "de",
+  "categories": ["medical", "education"],
+  "icons": [
+    { "src": "icons/icon-72.png",   "sizes": "72x72",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-96.png",   "sizes": "96x96",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-128.png",  "sizes": "128x128", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-144.png",  "sizes": "144x144", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-152.png",  "sizes": "152x152", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-192.png",  "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-384.png",  "sizes": "384x384", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png",  "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "screenshots": [
+    {
+      "src": "icons/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "PsychoEdukations-Bibliothek – Startseite"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Depression",
+      "short_name": "Depression",
+      "description": "Psychoedukation Depression direkt öffnen",
+      "url": "./index.html#depression",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "PTBS",
+      "short_name": "PTBS",
+      "description": "Psychoedukation PTBS direkt öffnen",
+      "url": "./index.html#ptbs",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "BPS / DBT",
+      "short_name": "BPS",
+      "description": "Psychoedukation Borderline-PS direkt öffnen",
+      "url": "./index.html#bps",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    }
+  ]
+}
